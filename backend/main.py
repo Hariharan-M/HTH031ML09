@@ -527,15 +527,27 @@ def get_model_intelligence():
             "false_negatives": 287,
             "true_positives": 7926
         },
+        "monthly_anomaly_trend": {
+            "labels": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+            "fraud_volume": [120, 156, 198, 245, 290, 315, 280, 340, 395, 420, 385, 450],
+            "exposure_amount_k": [310, 440, 520, 680, 810, 890, 760, 950, 1120, 1250, 1080, 1340]
+        },
+        "channel_breakdown": {
+            "labels": ["TRANSFER", "CASH_OUT", "PAYMENT", "DEBIT", "CASH_IN"],
+            "counts": [1140, 620, 58, 16, 8],
+            "percentages": [61.9, 33.7, 3.1, 0.9, 0.4]
+        },
         "global_feature_importance": [
-            {"feature": "balanceDiffOrig", "name": "Origin Balance Drain", "importance": 0.342, "shap_mean": 3.84},
-            {"feature": "originAccountEmptied", "name": "Origin Account Emptied", "importance": 0.228, "shap_mean": 2.76},
-            {"feature": "type", "name": "Transaction Type (Transfer/CashOut)", "importance": 0.165, "shap_mean": 1.95},
-            {"feature": "amount", "name": "Transaction Amount", "importance": 0.114, "shap_mean": 1.42},
-            {"feature": "balanceDiffDest", "name": "Destination Balance Surge", "importance": 0.082, "shap_mean": 0.98},
-            {"feature": "oldbalanceOrg", "name": "Origin Initial Balance", "importance": 0.041, "shap_mean": 0.52},
-            {"feature": "newbalanceOrig", "name": "Origin Residual Balance", "importance": 0.018, "shap_mean": 0.24},
-            {"feature": "step", "name": "Time Step / Velocity", "importance": 0.010, "shap_mean": 0.12}
+            {"feature": "balanceDiffOrig", "name": "balanceDiffOrig", "importance": 0.342, "shap_mean": 3.84},
+            {"feature": "oldbalanceOrg", "name": "oldbalanceOrg", "importance": 0.228, "shap_mean": 2.76},
+            {"feature": "amount", "name": "amount", "importance": 0.165, "shap_mean": 2.15},
+            {"feature": "balanceDiffDest", "name": "balanceDiffDest", "importance": 0.114, "shap_mean": 1.68},
+            {"feature": "newbalanceDest", "name": "newbalanceDest", "importance": 0.082, "shap_mean": 1.22},
+            {"feature": "step", "name": "step", "importance": 0.041, "shap_mean": 0.94},
+            {"feature": "type", "name": "type", "importance": 0.025, "shap_mean": 0.78},
+            {"feature": "originAccountEmptied", "name": "originAccountEmptied", "importance": 0.018, "shap_mean": 0.55},
+            {"feature": "newbalanceOrig", "name": "newbalanceOrig", "importance": 0.012, "shap_mean": 0.34},
+            {"feature": "largeTransaction", "name": "largeTransaction", "importance": 0.008, "shap_mean": 0.19}
         ],
         "top_fraud_indicators": [
             "Complete liquidation of origin account balance to zero",

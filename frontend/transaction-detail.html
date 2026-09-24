@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,90 +7,71 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-  
   <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="css/dark-mode.css">
-  <link rel="stylesheet" href="css/explainability.css">
 </head>
 <body>
 
-  <div class="app-wrapper">
-    <!-- Enterprise Sidebar -->
-    <aside class="app-sidebar">
-      <div class="sidebar-header">
-        <a href="index.html" class="brand-logo">
-          <div class="brand-badge-icon">AG</div>
-          <div class="brand-text-block">
-            <span class="brand-main-title">AEGIS RISK</span>
-            <span class="brand-sub-title">Financial Crime Unit</span>
-          </div>
-        </a>
-      </div>
+  <div class="aegis-app">
+    <!-- Minimalist Linear / Arc Sidebar -->
+    <aside class="aegis-sidebar">
+      <a href="index.html" class="sidebar-brand">
+        <div class="sidebar-brand-icon">AG</div>
+        <div class="sidebar-brand-title">
+          AEGIS <span class="sidebar-brand-badge">FCU</span>
+        </div>
+      </a>
 
       <div class="sidebar-nav">
         <div>
-          <div class="nav-group-title">Operations</div>
+          <div class="sidebar-section-title">Command Center</div>
           <ul class="sidebar-menu">
             <li>
-              <a href="index.html" class="menu-item-link">
-                <div class="nav-label-box">
+              <a href="index.html" class="sidebar-link">
+                <div class="sidebar-link-inner">
                   <i class="bi bi-grid-1x2"></i>
-                  <span>Executive Overview</span>
+                  <span>Overview</span>
                 </div>
               </a>
             </li>
             <li>
-              <a href="queue.html" class="menu-item-link">
-                <div class="nav-label-box">
+              <a href="queue.html" class="sidebar-link">
+                <div class="sidebar-link-inner">
                   <i class="bi bi-shield-exclamation"></i>
-                  <span>Triage Queue</span>
+                  <span>Fraud Queue</span>
                 </div>
-                <span class="menu-count-badge" id="sidebar-queue-badge">8</span>
+                <span class="sidebar-count-pill" id="sidebar-queue-badge">8</span>
               </a>
             </li>
-          </ul>
-        </div>
-
-        <div>
-          <div class="nav-group-title">Analysis & Intelligence</div>
-          <ul class="sidebar-menu">
             <li>
-              <a href="transaction-detail.html?id=TX-948271" class="menu-item-link active">
-                <div class="nav-label-box">
+              <a href="transaction-detail.html?id=TX-948271" class="sidebar-link active">
+                <div class="sidebar-link-inner">
                   <i class="bi bi-search"></i>
-                  <span>Case Investigator</span>
+                  <span>Investigator</span>
                 </div>
               </a>
             </li>
             <li>
-              <a href="analytics.html" class="menu-item-link">
-                <div class="nav-label-box">
+              <a href="analytics.html" class="sidebar-link">
+                <div class="sidebar-link-inner">
                   <i class="bi bi-bar-chart-line"></i>
                   <span>Model Intelligence</span>
                 </div>
               </a>
             </li>
             <li>
-              <a href="simulator.html" class="menu-item-link">
-                <div class="nav-label-box">
+              <a href="simulator.html" class="sidebar-link">
+                <div class="sidebar-link-inner">
                   <i class="bi bi-terminal"></i>
-                  <span>Inference Studio</span>
+                  <span>Inference Lab</span>
                 </div>
               </a>
             </li>
-          </ul>
-        </div>
-
-        <div>
-          <div class="nav-group-title">Configuration</div>
-          <ul class="sidebar-menu">
             <li>
-              <a href="settings.html" class="menu-item-link">
-                <div class="nav-label-box">
+              <a href="settings.html" class="sidebar-link">
+                <div class="sidebar-link-inner">
                   <i class="bi bi-sliders2"></i>
                   <span>Risk Policies</span>
                 </div>
@@ -101,238 +82,257 @@
       </div>
 
       <div class="sidebar-footer">
-        <div>ENGINE: XGBOOST 2.4 / SHAP</div>
-        <div class="text-success mt-0.5">● SQLite Persistent Store</div>
+        <div class="sidebar-status-indicator">
+          <span class="status-dot-active"></span>
+          <span>XGBOOST 2.4 / SHAP</span>
+        </div>
+        <div class="text-dim">SQLite Store Online</div>
       </div>
     </aside>
 
-    <main class="app-main">
-      <header class="app-topbar">
-        <div class="topbar-left">
-          <div class="topbar-breadcrumbs">
-            <a href="queue.html">Queue</a>
-            <span>/</span>
-            <span class="current-crumb" id="breadcrumb-tx-id">TX-948271 Investigation</span>
-          </div>
+    <!-- Main Workspace Viewport -->
+    <main class="aegis-main">
+      <header class="aegis-topbar">
+        <div class="topbar-breadcrumbs">
+          <a href="queue.html">Queue</a>
+          <span>/</span>
+          <span class="current-page" id="breadcrumb-tx-id">TX-948271 Investigation</span>
         </div>
 
-        <div class="topbar-right">
-          <div class="system-status-indicator backend-status-pill">
-            <span class="system-dot"></span>
-            <span>FastAPI Core: ONLINE</span>
+        <div class="topbar-actions">
+          <div class="engine-status-chip backend-status-pill">
+            <span class="status-dot-active"></span>
+            <span>FastAPI: ONLINE</span>
           </div>
 
-          <button class="theme-toggle-btn" title="Toggle Theme">
-            <i class="bi bi-moon-stars"></i>
-          </button>
-
-          <div class="user-analyst-chip">
-            <span class="text-muted">ANALYST:</span>
-            <span class="analyst-code">Sarah Lin (Lead FCU)</span>
+          <div class="analyst-profile-chip">
+            <span class="label">ANALYST:</span>
+            <span class="name">Sarah Lin (Lead)</span>
           </div>
         </div>
       </header>
 
-      <!-- Workstation Workspace Content -->
-      <div class="workstation-content">
-        <!-- Command Header & Action Console -->
-        <div class="workstation-header border-bottom pb-2 mb-3">
+      <div class="aegis-viewport">
+        <!-- Investigator Command Action Header (Linear / GitHub PR Style) -->
+        <div class="page-hero" style="border-bottom: 1px solid var(--border-base); padding-bottom: 1.25rem; margin-bottom: 1.5rem;">
           <div>
-            <div class="d-flex align-items-center gap-2 mb-1">
-              <span class="font-mono fs-5 fw-bold text-primary" id="tx-header-id">TX-948271</span>
-              <span class="badge-ws badge-ws-critical" id="tx-header-score-badge">98/100 Risk</span>
-              <span class="badge-ws badge-ws-critical" id="tx-header-risk-badge">Critical Risk</span>
-              <span class="badge-ws badge-ws-neutral" id="tx-header-status-badge">PENDING</span>
+            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.35rem; flex-wrap: wrap;">
+              <span class="font-mono" style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary);" id="tx-header-id">TX-948271</span>
+              <span class="status-pill pill-critical" id="tx-header-score-badge">98/100 Risk</span>
+              <span class="status-pill pill-critical" id="tx-header-risk-badge">Critical Risk</span>
+              <span class="status-pill pill-neutral" id="tx-header-status-badge">PENDING</span>
             </div>
             <div class="font-mono text-muted" style="font-size: 0.6875rem;" id="tx-header-timestamp">
-              Ingested at Step 302 • Target Wire Settlement
+              Ingested at Step 302 • Origin Wire Settlement
             </div>
           </div>
 
-          <!-- Direct Analyst Action Buttons -->
-          <div class="d-flex gap-1.5 flex-wrap align-items-center">
-            <button class="btn-ws btn-ws-danger" id="actionBlockBtn">
+          <!-- Action Toolbar -->
+          <div class="page-hero-actions" style="flex-wrap: wrap;">
+            <button class="aegis-btn aegis-btn-danger" id="actionBlockBtn">
               <i class="bi bi-slash-circle"></i> Freeze Account
             </button>
-            <button class="btn-ws btn-ws-warning" id="actionEscalateBtn">
+            <button class="aegis-btn aegis-btn-warning" id="actionEscalateBtn">
               <i class="bi bi-arrow-up-right-circle"></i> Escalate Tier III
             </button>
-            <button class="btn-ws btn-ws-success" id="actionClearBtn">
-              <i class="bi bi-check2"></i> Resolve & Clear
+            <button class="aegis-btn aegis-btn-success" id="actionClearBtn">
+              <i class="bi bi-check2"></i> Resolve Case
             </button>
-            <button class="btn-ws" id="actionFpBtn">
+            <button class="aegis-btn" id="actionFpBtn">
               <i class="bi bi-flag"></i> Mark FP
             </button>
-            <button class="btn-ws" id="actionPrintDossierBtn" onclick="window.print()">
+            <button class="aegis-btn" id="actionPrintDossierBtn" onclick="window.print()">
               <i class="bi bi-printer"></i> Print Dossier
             </button>
           </div>
         </div>
 
-        <!-- 3-Column Serious Institutional Layout -->
-        <div class="row g-3">
-          <!-- Left Column: Transaction Details & Settlement Flow (4 cols) -->
-          <div class="col-12 col-xl-4">
-            <!-- Settlement Ledger Flow -->
-            <div class="ws-panel mb-3">
-              <div class="ws-panel-header">
-                <h3 class="ws-panel-title">
-                  <i class="bi bi-arrow-left-right text-primary"></i> Settlement Balance Ledger
-                </h3>
-              </div>
-              <div class="ws-panel-body">
-                <div class="settlement-ledger">
-                  <div class="ledger-account-card">
-                    <span class="ledger-account-header">Origin (Sender)</span>
-                    <span class="ledger-account-id text-truncate" id="meta-orig">C847291039</span>
-                    <div class="mt-2">
-                      <div class="ledger-delta-row"><span class="text-muted">Pre-Bal:</span><span class="font-mono" id="meta-orig-old">$850,000</span></div>
-                      <div class="ledger-delta-row"><span class="text-muted">Post-Bal:</span><span class="font-mono text-danger" id="meta-orig-new">$0.00</span></div>
-                      <div class="ledger-delta-row highlight"><span class="text-danger">Net Drain:</span><span class="font-mono text-danger" id="flow-orig-diff">-$850,000</span></div>
-                    </div>
-                  </div>
+        <!-- 3-Column Workspace Grid (LEFT: Case Info | CENTER: Findings & SHAP | RIGHT: Assessment & Audit) -->
+        <div class="investigator-grid">
+          
+          <!-- LEFT COLUMN: Case Details & Settlement Flow -->
+          <div>
+            <div class="inv-section-title">
+              <i class="bi bi-arrow-left-right text-accent"></i> Settlement Ledger
+            </div>
 
-                  <div class="ledger-arrow"><i class="bi bi-arrow-right"></i></div>
-
-                  <div class="ledger-account-card">
-                    <span class="ledger-account-header">Destination (Receiver)</span>
-                    <span class="ledger-account-id text-truncate" id="meta-dest">M928371029</span>
-                    <div class="mt-2">
-                      <div class="ledger-delta-row"><span class="text-muted">Pre-Bal:</span><span class="font-mono" id="meta-dest-old">$0.00</span></div>
-                      <div class="ledger-delta-row"><span class="text-muted">Post-Bal:</span><span class="font-mono text-success" id="meta-dest-new">$850,000</span></div>
-                      <div class="ledger-delta-row highlight"><span class="text-success">Net Inflow:</span><span class="font-mono text-success" id="flow-dest-diff">+$850,000</span></div>
-                    </div>
-                  </div>
+            <!-- Flow Cards -->
+            <div class="flow-diagram">
+              <div class="flow-card">
+                <div class="flow-card-head">
+                  <span>Origin (Sender)</span>
+                  <span class="text-dim">Source</span>
                 </div>
+                <div class="flow-card-acc" id="meta-orig">C847291039</div>
+                <div class="flow-card-row" style="margin-top: 0.35rem;">
+                  <span class="text-muted">Pre-Bal:</span>
+                  <span class="font-mono" id="meta-orig-old">$850,000.00</span>
+                </div>
+                <div class="flow-card-row">
+                  <span class="text-muted">Post-Bal:</span>
+                  <span class="font-mono text-danger" id="meta-orig-new">$0.00</span>
+                </div>
+                <div class="flow-card-row drain">
+                  <span>Net Drain:</span>
+                  <span class="font-mono" id="flow-orig-diff">-$850,000.00</span>
+                </div>
+              </div>
 
-                <!-- Transaction Attributes -->
-                <div class="p-2.5 bg-light border rounded font-mono" style="font-size: 0.6875rem;">
-                  <div class="d-flex justify-content-between py-1"><span class="text-muted">Channel Type:</span><span class="fw-bold" id="meta-type">TRANSFER</span></div>
-                  <div class="d-flex justify-content-between py-1"><span class="text-muted">Gross Amount:</span><span class="fw-bold" id="meta-amount">$850,000.00</span></div>
-                  <div class="d-flex justify-content-between py-1"><span class="text-muted">Origin Emptied:</span><span class="fw-bold text-danger" id="meta-emptied">YES (Emptied to $0)</span></div>
-                  <div class="d-flex justify-content-between py-1"><span class="text-muted">High-Value Wire Flag:</span><span class="fw-bold text-danger" id="meta-large-tx">YES (&gt; $100k)</span></div>
+              <div class="flow-arrow-down">
+                <i class="bi bi-arrow-down"></i>
+              </div>
+
+              <div class="flow-card">
+                <div class="flow-card-head">
+                  <span>Destination (Receiver)</span>
+                  <span class="text-dim">Beneficiary</span>
+                </div>
+                <div class="flow-card-acc" id="meta-dest">M928371029</div>
+                <div class="flow-card-row" style="margin-top: 0.35rem;">
+                  <span class="text-muted">Pre-Bal:</span>
+                  <span class="font-mono" id="meta-dest-old">$0.00</span>
+                </div>
+                <div class="flow-card-row">
+                  <span class="text-muted">Post-Bal:</span>
+                  <span class="font-mono text-success" id="meta-dest-new">$850,000.00</span>
+                </div>
+                <div class="flow-card-row inflow">
+                  <span>Net Inflow:</span>
+                  <span class="font-mono" id="flow-dest-diff">+$850,000.00</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Case Attributes -->
+            <div class="aegis-panel" style="margin-bottom: 1.25rem;">
+              <div class="aegis-panel-header">
+                <div class="aegis-panel-title">
+                  <i class="bi bi-info-circle text-accent"></i> Case Metadata
+                </div>
+              </div>
+              <div class="aegis-panel-body font-mono" style="font-size: 0.6875rem; padding: 0.75rem;">
+                <div style="display: flex; justify-content: space-between; padding: 0.25rem 0; border-bottom: 1px solid var(--border-subtle);">
+                  <span class="text-muted">Channel:</span>
+                  <span class="fw-bold" id="meta-type">TRANSFER</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding: 0.25rem 0; border-bottom: 1px solid var(--border-subtle);">
+                  <span class="text-muted">Gross Amount:</span>
+                  <span class="fw-bold" id="meta-amount">$850,000.00</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding: 0.25rem 0; border-bottom: 1px solid var(--border-subtle);">
+                  <span class="text-muted">Origin Emptied:</span>
+                  <span class="fw-bold text-danger" id="meta-emptied">YES (Emptied)</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding: 0.25rem 0;">
+                  <span class="text-muted">High Value Flag:</span>
+                  <span class="fw-bold text-danger" id="meta-large-tx">YES (&gt; $100k)</span>
                 </div>
               </div>
             </div>
 
             <!-- Case Assignment & Note Logger -->
-            <div class="ws-panel">
-              <div class="ws-panel-header">
-                <h3 class="ws-panel-title">
-                  <i class="bi bi-person-badge text-primary"></i> Case Assignment & Journal
-                </h3>
+            <div class="aegis-panel">
+              <div class="aegis-panel-header">
+                <div class="aegis-panel-title">
+                  <i class="bi bi-person-badge text-accent"></i> Assignment & Journal
+                </div>
               </div>
-              <div class="ws-panel-body">
-                <div class="row g-2 mb-2 font-mono" style="font-size: 0.75rem;">
-                  <div class="col-6">
-                    <label class="form-label text-muted" style="font-size: 0.6875rem;">ASSIGNED ANALYST</label>
-                    <select id="case-analyst-select" class="ws-select w-100 font-mono">
-                      <option value="Sarah Lin (Lead FCU)">Sarah Lin (Lead FCU)</option>
-                      <option value="Marcus Vance">Marcus Vance (Tier II)</option>
-                      <option value="Elena Rostova">Elena Rostova (Senior)</option>
-                      <option value="David Park">David Park (Investigator)</option>
+              <div class="aegis-panel-body" style="padding: 0.75rem;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 0.75rem;">
+                  <div>
+                    <label style="display: block; font-family: var(--font-mono); font-size: 0.625rem; color: var(--text-dim); margin-bottom: 0.25rem;">ANALYST</label>
+                    <select id="case-analyst-select" class="aegis-select font-mono">
+                      <option value="Sarah Lin (Lead FCU)">Sarah Lin (Lead)</option>
+                      <option value="Marcus Vance">Marcus Vance</option>
+                      <option value="Elena Rostova">Elena Rostova</option>
+                      <option value="David Park">David Park</option>
                     </select>
                   </div>
-                  <div class="col-6">
-                    <label class="form-label text-muted" style="font-size: 0.6875rem;">CASE PRIORITY</label>
-                    <select id="case-priority-select" class="ws-select w-100 font-mono">
-                      <option value="CRITICAL">CRITICAL (1h SLA)</option>
-                      <option value="HIGH">HIGH (4h SLA)</option>
-                      <option value="MEDIUM">MEDIUM (24h SLA)</option>
-                      <option value="LOW">LOW (72h SLA)</option>
+                  <div>
+                    <label style="display: block; font-family: var(--font-mono); font-size: 0.625rem; color: var(--text-dim); margin-bottom: 0.25rem;">PRIORITY</label>
+                    <select id="case-priority-select" class="aegis-select font-mono">
+                      <option value="CRITICAL">CRITICAL (1h)</option>
+                      <option value="HIGH">HIGH (4h)</option>
+                      <option value="MEDIUM">MEDIUM (24h)</option>
+                      <option value="LOW">LOW (72h)</option>
                     </select>
                   </div>
                 </div>
 
-                <div class="mb-2">
-                  <label class="form-label font-mono text-muted" style="font-size: 0.6875rem;">ADD CASE JOURNAL NOTE</label>
-                  <textarea id="case-new-note" class="ws-input w-100 font-mono" rows="2" placeholder="Record investigation findings, phone verification notes, or callback..." style="font-size: 0.75rem;"></textarea>
+                <div style="margin-bottom: 0.5rem;">
+                  <textarea id="case-new-note" class="aegis-input font-mono" rows="2" placeholder="Append audit note or investigation findings..." style="font-size: 0.75rem;"></textarea>
                 </div>
-                <button class="btn-ws btn-ws-primary w-100 justify-content-center" id="saveCaseNoteBtn">
-                  <i class="bi bi-journal-plus"></i> Append to Case Audit Ledger
+                <button class="aegis-btn aegis-btn-primary" id="saveCaseNoteBtn" style="width: 100%;">
+                  <i class="bi bi-journal-plus"></i> Append to Journal
                 </button>
               </div>
             </div>
           </div>
 
-          <!-- Center Column: Investigation Findings & TreeSHAP (4 cols) -->
-          <div class="col-12 col-xl-4">
-            <!-- TreeSHAP Additive Attribution Chart -->
-            <div class="ws-panel mb-3">
-              <div class="ws-panel-header">
-                <div>
-                  <h3 class="ws-panel-title">
-                    <i class="bi bi-bar-chart-steps text-primary"></i> TreeSHAP Additive Feature Contributions
-                  </h3>
-                  <div class="text-muted font-mono" style="font-size: 0.625rem; margin-top: 2px;">
-                    <span class="text-danger fw-bold">■ Positive Log-Odds (Fraud Driver)</span> | <span class="text-success fw-bold">■ Negative Log-Odds (Mitigating)</span>
-                  </div>
+          <!-- CENTER COLUMN: Investigation Findings & TreeSHAP -->
+          <div>
+            <div class="inv-section-title">
+              <i class="bi bi-bar-chart-steps text-accent"></i> TreeSHAP Additive Feature Contributions
+            </div>
+
+            <div class="aegis-panel" style="margin-bottom: 1.25rem;">
+              <div class="aegis-panel-body" style="padding: 1rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; font-family: var(--font-mono); font-size: 0.6875rem;">
+                  <span class="text-muted">Exact TreeSHAP attribution log-odds</span>
+                  <span class="text-danger fw-bold">■ Fraud Push</span>
+                  <span class="text-success fw-bold">■ Legit Push</span>
                 </div>
-              </div>
-              <div class="ws-panel-body">
-                <div style="height: 230px;">
+                <div style="height: 220px;">
                   <canvas id="shapContributionChart"></canvas>
                 </div>
               </div>
             </div>
 
-            <!-- Natural Language Ranked Risk Drivers -->
-            <div class="ws-panel">
-              <div class="ws-panel-header">
-                <h3 class="ws-panel-title">
-                  <i class="bi bi-card-checklist text-primary"></i> Natural Language Risk Attribution Decomposition
-                </h3>
-                <span class="badge-ws badge-ws-critical">Ranked Drivers</span>
-              </div>
-              <div class="ws-panel-body" id="shap-factors-container">
-                <!-- Dynamically rendered -->
-              </div>
+            <div class="inv-section-title">
+              <i class="bi bi-card-checklist text-accent"></i> Natural Language Risk Decomposition
+            </div>
+
+            <div id="shap-factors-container">
+              <!-- Dynamically populated SHAP factors -->
             </div>
           </div>
 
-          <!-- Right Column: Risk Assessment & Audit Timeline (4 cols) -->
-          <div class="col-12 col-xl-4">
-            <!-- Bayesian Exposure Metric Box -->
-            <div class="ws-panel mb-3">
-              <div class="ws-panel-header">
-                <h3 class="ws-panel-title">
-                  <i class="bi bi-speedometer2 text-danger"></i> Bayesian Risk Assessment
-                </h3>
+          <!-- RIGHT COLUMN: Risk Assessment & Audit Timeline -->
+          <div>
+            <div class="inv-section-title">
+              <i class="bi bi-speedometer2 text-danger"></i> Bayesian Risk Assessment
+            </div>
+
+            <div class="bayesian-meter-box">
+              <div class="meter-circle">
+                <svg class="meter-svg" viewBox="0 0 64 64">
+                  <circle class="meter-bg" cx="32" cy="32" r="26"></circle>
+                  <circle class="meter-bar" id="radial-progress-bar" cx="32" cy="32" r="26" stroke-dasharray="163.36" stroke-dashoffset="2"></circle>
+                </svg>
+                <span class="meter-percent" id="risk-meter-percent">99.4%</span>
               </div>
-              <div class="ws-panel-body">
-                <div class="gauge-metric-container">
-                  <div class="gauge-circle-box">
-                    <svg class="gauge-svg" viewBox="0 0 64 64">
-                      <circle class="gauge-bg" cx="32" cy="32" r="26"></circle>
-                      <circle class="gauge-bar" id="radial-progress-bar" cx="32" cy="32" r="26" stroke-dasharray="163.36" stroke-dashoffset="2"></circle>
-                    </svg>
-                    <span class="gauge-text-val" id="risk-meter-percent">99.4%</span>
-                  </div>
-                  <div>
-                    <div class="text-muted font-mono" style="font-size: 0.6875rem;">Calculated Exposure:</div>
-                    <div class="font-mono fs-5 fw-bold text-danger" id="risk-meter-loss">$845,070.00</div>
-                    <div class="font-mono text-muted" style="font-size: 0.625rem;" id="risk-loss-formula">
-                      P(Fraud) 0.9942 × $850,000.00
-                    </div>
-                  </div>
+              <div>
+                <div class="text-muted font-mono" style="font-size: 0.6875rem;">Calculated Exposure:</div>
+                <div class="font-mono text-danger" style="font-size: 1.25rem; font-weight: 700;" id="risk-meter-loss">$845,070.00</div>
+                <div class="font-mono text-dim" style="font-size: 0.625rem; margin-top: 0.2rem;" id="risk-loss-formula">
+                  P(Fraud) 0.9942 × $850,000.00
                 </div>
               </div>
             </div>
 
-            <!-- Immutable Case Audit Log -->
-            <div class="ws-panel">
-              <div class="ws-panel-header">
-                <h3 class="ws-panel-title">
-                  <i class="bi bi-journal-text text-primary"></i> Immutable Case Audit Log
-                </h3>
-              </div>
-              <div class="ws-panel-body">
-                <ul class="ws-timeline" id="audit-timeline-list">
-                  <!-- Dynamically populated from SQLite audit_logs table -->
-                </ul>
+            <div class="inv-section-title">
+              <i class="bi bi-journal-text text-accent"></i> Immutable Case Audit Log
+            </div>
+
+            <div class="aegis-panel">
+              <div class="aegis-panel-body" style="padding: 1rem;">
+                <div class="audit-ledger" id="audit-timeline-list">
+                  <!-- Dynamically populated from SQLite audit logs -->
+                </div>
               </div>
             </div>
           </div>
+
         </div>
 
       </div>
@@ -341,9 +341,7 @@
 
   <div id="toast-container" class="toast-container-custom"></div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  
   <script src="js/config.js"></script>
   <script src="js/toast.js"></script>
   <script src="js/theme.js"></script>

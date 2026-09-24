@@ -25,7 +25,6 @@ htmlcov/
 # Logs and local runtime output
 *.log
 *.pid
-*.db
 
 # Editor and operating-system files
 .vscode/
