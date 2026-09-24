@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inference Studio | Aegis Risk Intelligence</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/dark-mode.css">
+  <link rel="stylesheet" href="css/explainability.css">
+</head>
+<body>
+
+  <div class="app-wrapper">
+    <!-- Enterprise Sidebar -->
+    <aside class="app-sidebar">
+      <div class="sidebar-header">
+        <a href="index.html" class="brand-logo">
+          <div class="brand-badge-icon">AG</div>
+          <div class="brand-text-block">
+            <span class="brand-main-title">AEGIS RISK</span>
+            <span class="brand-sub-title">Financial Crime Unit</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="sidebar-nav">
+        <div>
+          <div class="nav-group-title">Operations</div>
+          <ul class="sidebar-menu">
+            <li>
+              <a href="index.html" class="menu-item-link">
+                <div class="nav-label-box">
+                  <i class="bi bi-grid-1x2"></i>
+                  <span>Executive Overview</span>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="queue.html" class="menu-item-link">
+                <div class="nav-label-box">
+                  <i class="bi bi-shield-exclamation"></i>
+                  <span>Triage Queue</span>
+                </div>
+                <span class="menu-count-badge" id="sidebar-queue-badge">8</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="nav-group-title">Analysis & Intelligence</div>
+          <ul class="sidebar-menu">
+            <li>
+              <a href="transaction-detail.html?id=TX-948271" class="menu-item-link">
+                <div class="nav-label-box">
+                  <i class="bi bi-search"></i>
+                  <span>Case Investigator</span>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="analytics.html" class="menu-item-link">
+                <div class="nav-label-box">
+                  <i class="bi bi-bar-chart-line"></i>
+                  <span>Model Intelligence</span>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="simulator.html" class="menu-item-link active">
+                <div class="nav-label-box">
+                  <i class="bi bi-terminal"></i>
+                  <span>Inference Studio</span>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="nav-group-title">Configuration</div>
+          <ul class="sidebar-menu">
+            <li>
+              <a href="settings.html" class="menu-item-link">
+                <div class="nav-label-box">
+                  <i class="bi bi-sliders2"></i>
+                  <span>Risk Policies</span>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <div>ENGINE: XGBOOST 2.4 / SHAP</div>
+        <div class="text-success mt-0.5">● SQLite Persistent Store</div>
+      </div>
+    </aside>
+
+    <!-- Main Workspace Canvas -->
+    <main class="app-main">
+      <header class="app-topbar">
+        <div class="topbar-left">
+          <div class="topbar-breadcrumbs">
+            <a href="index.html">Aegis Console</a>
+            <span>/</span>
+            <span class="current-crumb">Inference Studio</span>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <div class="system-status-indicator backend-status-pill">
+            <span class="system-dot"></span>
+            <span>FastAPI Core: ONLINE</span>
+          </div>
+
+          <button class="theme-toggle-btn" title="Toggle Theme">
+            <i class="bi bi-moon-stars"></i>
+          </button>
+
+          <div class="user-analyst-chip">
+            <span class="text-muted">ANALYST:</span>
+            <span class="analyst-code">Sarah Lin (Lead FCU)</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="workstation-content">
+        <div class="workstation-header">
+          <div>
+            <h1 class="workstation-title">
+              <i class="bi bi-terminal text-primary"></i> Real-Time Transaction Inference Studio
+            </h1>
+            <p class="workstation-subtitle">Simulate arbitrary transaction payloads against the XGBoost ensemble with instant TreeSHAP attribution and risk advisory guidance.</p>
+          </div>
+        </div>
+
+        <!-- Scenario Presets Bar -->
+        <div class="ws-panel mb-2">
+          <div class="ws-panel-body p-2">
+            <div class="d-flex align-items-center gap-2 flex-wrap">
+              <span class="text-muted font-mono" style="font-size: 0.6875rem; font-weight: 700;">DEMO SCENARIOS:</span>
+              <button class="btn-ws active" data-preset="wire_drain">
+                <i class="bi bi-shield-slash text-danger"></i> Wire Drain Attack
+              </button>
+              <button class="btn-ws" data-preset="account_takeover">
+                <i class="bi bi-person-x text-danger"></i> Account Takeover (ATO)
+              </button>
+              <button class="btn-ws" data-preset="cash_out">
+                <i class="bi bi-cash-stack text-warning"></i> Rapid Cash-Out
+              </button>
+              <button class="btn-ws" data-preset="dest_surge">
+                <i class="bi bi-graph-up-arrow text-accent"></i> Destination Funnel
+              </button>
+              <button class="btn-ws" data-preset="normal_payment">
+                <i class="bi bi-check2 text-success"></i> Retail Transaction
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <!-- Input Form Column -->
+          <div class="col-12 col-lg-6">
+            <div class="ws-panel h-100 mb-0">
+              <div class="ws-panel-header">
+                <h3 class="ws-panel-title"><i class="bi bi-sliders text-primary"></i> Transaction Input Vector</h3>
+                <span class="badge-ws badge-ws-neutral font-mono">Inference Parameters</span>
+              </div>
+              <div class="ws-panel-body">
+                <form id="simulatorForm">
+                  <div class="row g-2">
+                    <div class="col-6">
+                      <label class="form-label font-mono" style="font-size: 0.6875rem;">AMOUNT ($ USD)</label>
+                      <input type="number" id="sim-amount" class="ws-input w-100 font-mono" value="850000" step="0.01" required>
+                    </div>
+                    <div class="col-6">
+                      <label class="form-label font-mono" style="font-size: 0.6875rem;">CHANNEL TYPE</label>
+                      <select id="sim-type" class="ws-select w-100 font-mono">
+                        <option value="4">4 - TRANSFER</option>
+                        <option value="1">1 - CASH_OUT</option>
+                        <option value="3">3 - PAYMENT</option>
+                        <option value="2">2 - DEBIT</option>
+                        <option value="0">0 - CASH_IN</option>
+                      </select>
+                    </div>
+
+                    <div class="col-6">
+                      <label class="form-label font-mono" style="font-size: 0.6875rem;">STEP (HOURLY UNIT)</label>
+                      <input type="number" id="sim-step" class="ws-input w-100 font-mono" value="300" required>
+                    </div>
+                    <div class="col-6"></div>
+
+                    <div class="col-6">
+                      <label class="form-label font-mono" style="font-size: 0.6875rem;">ORIGIN PRE-BALANCE ($)</label>
+                      <input type="number" id="sim-oldbalanceOrg" class="ws-input w-100 font-mono" value="850000" step="0.01" required>
+                    </div>
+                    <div class="col-6">
+                      <label class="form-label font-mono" style="font-size: 0.6875rem;">ORIGIN POST-BALANCE ($)</label>
+                      <input type="number" id="sim-newbalanceOrig" class="ws-input w-100 font-mono" value="0" step="0.01" required>
+                    </div>
+
+                    <div class="col-6">
+                      <label class="form-label font-mono" style="font-size: 0.6875rem;">DEST PRE-BALANCE ($)</label>
+                      <input type="number" id="sim-oldbalanceDest" class="ws-input w-100 font-mono" value="0" step="0.01" required>
+                    </div>
+                    <div class="col-6">
+                      <label class="form-label font-mono" style="font-size: 0.6875rem;">DEST POST-BALANCE ($)</label>
+                      <input type="number" id="sim-newbalanceDest" class="ws-input w-100 font-mono" value="850000" step="0.01" required>
+                    </div>
+                  </div>
+
+                  <!-- Auto-Derived Features Box -->
+                  <div class="mt-3 p-2.5 bg-light border rounded font-mono" style="font-size: 0.6875rem;">
+                    <div class="text-muted fw-bold mb-1">ENGINEERED ATTRIBUTES:</div>
+                    <div class="row g-1">
+                      <div class="col-6">balanceDiffOrig: <span class="fw-bold" id="derived-diff-orig">$850,000.00</span></div>
+                      <div class="col-6">balanceDiffDest: <span class="fw-bold" id="derived-diff-dest">$850,000.00</span></div>
+                      <div class="col-6">originAccountEmptied: <span class="fw-bold text-danger" id="derived-emptied">TRUE (1)</span></div>
+                      <div class="col-6">largeTransaction: <span class="fw-bold text-danger" id="derived-large">TRUE (1)</span></div>
+                    </div>
+                  </div>
+
+                  <div class="mt-3">
+                    <button type="button" class="btn-ws btn-ws-primary w-100 justify-content-center py-2" id="runSimulationBtn">
+                      <span class="spinner-border spinner-border-sm d-none" id="sim-spinner"></span>
+                      <i class="bi bi-play-fill"></i> Execute XGBoost & TreeSHAP Evaluation
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- Output Column: Investigation Summary & Decision Advisory -->
+          <div class="col-12 col-lg-6">
+            <div class="ws-panel h-100 mb-0" id="sim-result-card">
+              <div class="ws-panel-header">
+                <h3 class="ws-panel-title"><i class="bi bi-file-earmark-medical text-primary"></i> Investigation Summary & Advisory</h3>
+                <span class="badge-ws badge-ws-neutral font-mono" id="sim-latency">14ms Latency</span>
+              </div>
+              <div class="ws-panel-body">
+                <!-- Classification Header Block -->
+                <div class="p-3 border rounded mb-3" style="background: var(--ws-surface-subtle);">
+                  <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="badge-ws badge-ws-critical fs-6 px-3 py-1" id="sim-pred-badge">
+                      <i class="bi bi-shield-slash"></i> FRAUD DETECTED
+                    </span>
+                    <span class="badge-ws badge-ws-critical" id="sim-risk-tier-badge">Critical Risk</span>
+                  </div>
+
+                  <div class="row g-2 mt-1 font-mono">
+                    <div class="col-6 border-end">
+                      <div class="text-muted" style="font-size: 0.6875rem;">Fraud Probability</div>
+                      <div class="fs-4 fw-bold text-danger" id="sim-prob-val">99.42%</div>
+                    </div>
+                    <div class="col-6 ps-3">
+                      <div class="text-muted" style="font-size: 0.6875rem;">Financial Exposure</div>
+                      <div class="fs-4 fw-bold text-danger" id="sim-loss-val">$845,070.00</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Primary SHAP Influencing Drivers -->
+                <div class="mb-3">
+                  <div class="text-muted font-mono fw-bold mb-1" style="font-size: 0.6875rem;">TOP INFLUENCING ATTRIBUTIONS:</div>
+                  <ul class="list-group list-group-flush border rounded font-mono" style="font-size: 0.75rem;" id="sim-reasons-list">
+                    <!-- Populated dynamically -->
+                  </ul>
+                </div>
+
+                <!-- Decision Recommendation Box -->
+                <div class="p-3 border rounded mb-3" id="sim-recommendation-box" style="background: var(--ws-critical-bg); border-color: var(--ws-critical-border) !important;">
+                  <div class="d-flex align-items-center gap-2 mb-1">
+                    <i class="bi bi-exclamation-octagon-fill text-danger fs-6" id="sim-rec-icon"></i>
+                    <span class="fw-bold font-mono text-danger" style="font-size: 0.75rem;" id="sim-rec-title">CRITICAL ACTION REQUIRED</span>
+                  </div>
+                  <div class="small" id="sim-rec-text" style="line-height: 1.4; color: var(--ws-text-primary);">
+                    Immediate Intervention Required. Freeze origin account and halt settlement dispatch to prevent permanent wire loss. Escalate case to Senior Financial Crime Unit.
+                  </div>
+                </div>
+
+                <!-- Natural Language Analyst Summary -->
+                <div class="p-2.5 border rounded" style="background: var(--ws-surface-subtle);">
+                  <div class="text-muted font-mono fw-bold mb-1" style="font-size: 0.6875rem;">ANALYST CASE NARRATIVE:</div>
+                  <div class="font-mono text-secondary" style="font-size: 0.75rem; line-height: 1.4;" id="sim-narrative-text">
+                    The XGBoost model flagged significant high-risk anomaly patterns. The sender account was completely emptied from a pre-balance of $850,000.00 to $0.00 via high-volume transfer. TreeSHAP indicates balance delta and zeroing flags as primary risk drivers.
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <div id="toast-container" class="toast-container-custom"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <script src="js/config.js"></script>
+  <script src="js/toast.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/simulator.js"></script>
+</body>
+</html>

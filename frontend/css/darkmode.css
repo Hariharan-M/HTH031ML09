@@ -1,0 +1,105 @@
+/* ==========================================================================
+   ANALYST WORKSTATION DARK THEME
+   Bloomberg Terminal / Datadog / GitHub Dark Institutional Palette
+   High-contrast charcoal, non-distracting muted signals
+   ========================================================================== */
+
+[data-theme="dark"] {
+  --ws-bg: #0d1117;
+  --ws-surface: #161b22;
+  --ws-surface-subtle: #0f141c;
+  --ws-surface-hover: #1f242c;
+  --ws-header-bg: #090d14;
+  --ws-sidebar-bg: #090d14;
+  --ws-sidebar-hover: #161b22;
+  --ws-sidebar-active: #21262d;
+
+  --ws-border: #30363d;
+  --ws-border-subtle: #21262d;
+  --ws-border-dark: #484f58;
+
+  --ws-text-primary: #f0f6fc;
+  --ws-text-secondary: #c9d1d9;
+  --ws-text-muted: #8b949e;
+  --ws-text-light: #6e7681;
+  --ws-text-inverse: #0d1117;
+
+  /* Muted High-Contrast Signals */
+  --ws-critical: #f85149;
+  --ws-critical-bg: rgba(248, 81, 73, 0.12);
+  --ws-critical-border: rgba(248, 81, 73, 0.35);
+  --ws-critical-text: #ff7b72;
+
+  --ws-high: #f0883e;
+  --ws-high-bg: rgba(240, 136, 62, 0.12);
+  --ws-high-border: rgba(240, 136, 62, 0.35);
+  --ws-high-text: #ffa657;
+
+  --ws-medium: #d29922;
+  --ws-medium-bg: rgba(210, 153, 34, 0.12);
+  --ws-medium-border: rgba(210, 153, 34, 0.35);
+  --ws-medium-text: #e3b341;
+
+  --ws-low: #3fb950;
+  --ws-low-bg: rgba(63, 185, 80, 0.12);
+  --ws-low-border: rgba(63, 185, 80, 0.35);
+  --ws-low-text: #7ee787;
+
+  --ws-accent: #58a6ff;
+  --ws-accent-subtle: rgba(88, 166, 255, 0.1);
+}
+
+[data-theme="dark"] body {
+  background-color: var(--ws-bg);
+  color: var(--ws-text-primary);
+}
+
+[data-theme="dark"] .ws-input,
+[data-theme="dark"] .ws-select {
+  background-color: #0d1117;
+  border-color: #30363d;
+  color: #f0f6fc;
+}
+
+[data-theme="dark"] .ws-input:focus,
+[data-theme="dark"] .ws-select:focus {
+  border-color: #58a6ff;
+  box-shadow: 0 0 0 1px #58a6ff;
+}
+
+[data-theme="dark"] .ws-table th {
+  background-color: #0f141c;
+  border-color: #30363d;
+  color: #8b949e;
+}
+
+[data-theme="dark"] .ws-table td {
+  border-color: #21262d;
+  color: #f0f6fc;
+}
+
+[data-theme="dark"] .ws-table tbody tr:hover {
+  background-color: #1c2128;
+}
+
+[data-theme="dark"] .system-status-indicator {
+  background: rgba(63, 185, 80, 0.1);
+  color: #7ee787;
+  border-color: rgba(63, 185, 80, 0.3);
+}
+
+[data-theme="dark"] .system-dot {
+  background-color: #3fb950;
+}
+
+[data-theme="dark"] .ws-tab-item.active {
+  background-color: #21262d;
+  border-color: #30363d;
+  color: #f0f6fc;
+}
+
+[data-theme="dark"] .badge-ws-neutral {
+  background-color: #21262d;
+  color: #8b949e;
+  border-color: #30363d;
+}

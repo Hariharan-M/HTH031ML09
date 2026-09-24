@@ -1,0 +1,136 @@
+const AnalyticsController = {
+  charts: {},
+
+  async init() {
+    const [dashboardData, intelData] = await Promise.all([
+      ApiService.getDashboardData(),
+      ApiService.getModelIntelligence()
+    ]);
+
+    if (intelData && intelData.performance_metrics) {
+      this.renderMetrics(intelData.performance_metrics);
+    } else {
+      this.renderMetrics(dashboardData.metrics);
+    }
+
+    this.renderCharts(dashboardData, intelData);
+  },
+
+  renderMetrics(m) {
+    const precEl = document.getElementById('metric-precision');
+    const recEl = document.getElementById('metric-recall');
+    const f1El = document.getElementById('metric-f1');
+    const rocAucEl = document.getElementById('metric-roc-auc');
+
+    if (precEl) precEl.textContent = formatPercent(m.precision, 2);
+    if (recEl) recEl.textContent = formatPercent(m.recall, 2);
+    if (f1El) f1El.textContent = formatPercent(m.f1_score, 2);
+    if (rocAucEl) rocAucEl.textContent = (m.roc_auc || 0.9984).toFixed(4);
+  },
+
+  renderCharts(data, intelData) {
+    const colors = ChartService.getThemeColors();
+
+    // 1. Monthly Trends Chart
+    const trendCtx = document.getElementById('analyticsTrendChart');
+    if (trendCtx) {
+      this.charts.monthlyTrend = new Chart(trendCtx, {
+        type: 'bar',
+        data: {
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+          datasets: [
+            {
+              label: 'Fraud Volume',
+              data: [180, 210, 195, 240, 290, 260, 310, 280, 167],
+              backgroundColor: colors.accent,
+              borderRadius: 2
+            },
+            {
+              label: 'Prevented Loss ($k)',
+              data: [420, 580, 510, 690, 840, 780, 920, 810, 680],
+              backgroundColor: colors.danger,
+              borderRadius: 2
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'top',
+              labels: { color: colors.text, font: { family: 'JetBrains Mono', size: 10 } }
+            },
+            tooltip: { backgroundColor: colors.tooltipBg, padding: 8 }
+          },
+          scales: {
+            x: { grid: { display: false }, ticks: { color: colors.text, font: { family: 'JetBrains Mono', size: 9 } } },
+            y: { grid: { color: colors.grid, drawBorder: false }, ticks: { color: colors.text, font: { family: 'JetBrains Mono', size: 9 } } }
+          }
+        }
+      });
+    }
+
+    // 2. Transaction Type Distribution
+    this.charts.typeDist = ChartService.createTypeDistributionChart('analyticsTypeChart', data.fraud_by_type);
+
+    // 3. Global SHAP Feature Importance
+    const shapCtx = document.getElementById('globalShapChart');
+    if (shapCtx) {
+      let labels = [
+        'balanceDiffOrig (Drain)',
+        'originAccountEmptied',
+        'type (TRANSFER/CASH_OUT)',
+        'amount (High Value)',
+        'balanceDiffDest (Surge)',
+        'oldbalanceOrg',
+        'newbalanceOrig',
+        'step (Velocity)'
+      ];
+      let shapData = [3.84, 2.76, 1.95, 1.42, 0.98, 0.52, 0.24, 0.12];
+
+      if (intelData && intelData.global_feature_importance) {
+        labels = intelData.global_feature_importance.map(g => g.name || g.feature);
+        shapData = intelData.global_feature_importance.map(g => g.shap_mean || g.importance);
+      }
+
+      this.charts.globalShap = new Chart(shapCtx, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Mean |SHAP Value| (Global Impact)',
+            data: shapData,
+            backgroundColor: colors.accent,
+            borderRadius: 2
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: { backgroundColor: colors.tooltipBg, padding: 8 }
+          },
+          scales: {
+            x: {
+              grid: { color: colors.grid, drawBorder: false },
+              ticks: { color: colors.text, font: { family: 'JetBrains Mono', size: 9 } }
+            },
+            y: {
+              grid: { display: false },
+              ticks: { color: colors.heading, font: { family: 'JetBrains Mono', size: 9, weight: 500 } }
+            }
+          }
+        }
+      });
+    }
+  }
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  if (document.getElementById('analyticsTrendChart')) {
+    AnalyticsController.init();
+  }
+});
