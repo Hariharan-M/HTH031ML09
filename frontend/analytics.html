@@ -1,310 +1,515 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" data-theme="dark">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Model Intelligence | Aegis Risk Intelligence</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/main.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Model Intelligence | Aegis Risk Intelligence</title>
 
-  <div class="aegis-app">
-    <!-- Minimalist Linear / Arc Sidebar -->
-    <aside class="aegis-sidebar">
-      <a href="index.html" class="sidebar-brand">
-        <div class="sidebar-brand-icon">AG</div>
-        <div class="sidebar-brand-title">
-          AEGIS <span class="sidebar-brand-badge">FCU</span>
-        </div>
-      </a>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
-      <div class="sidebar-nav">
-        <div>
-          <div class="sidebar-section-title">Command Center</div>
-          <ul class="sidebar-menu">
-            <li>
-              <a href="index.html" class="sidebar-link">
-                <div class="sidebar-link-inner">
-                  <i class="bi bi-grid-1x2"></i>
-                  <span>Overview</span>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="queue.html" class="sidebar-link">
-                <div class="sidebar-link-inner">
-                  <i class="bi bi-shield-exclamation"></i>
-                  <span>Fraud Queue</span>
-                </div>
-                <span class="sidebar-count-pill" id="sidebar-queue-badge">8</span>
-              </a>
-            </li>
-            <li>
-              <a href="transaction-detail.html?id=TX-948271" class="sidebar-link">
-                <div class="sidebar-link-inner">
-                  <i class="bi bi-search"></i>
-                  <span>Investigator</span>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="analytics.html" class="sidebar-link active">
-                <div class="sidebar-link-inner">
-                  <i class="bi bi-bar-chart-line"></i>
-                  <span>Model Intelligence</span>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="simulator.html" class="sidebar-link">
-                <div class="sidebar-link-inner">
-                  <i class="bi bi-terminal"></i>
-                  <span>Inference Lab</span>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="settings.html" class="sidebar-link">
-                <div class="sidebar-link-inner">
-                  <i class="bi bi-sliders2"></i>
-                  <span>Risk Policies</span>
-                </div>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="sidebar-footer">
-        <div class="sidebar-status-indicator">
-          <span class="status-dot-active"></span>
-          <span>XGBOOST 2.4 / SHAP</span>
-        </div>
-        <div class="text-dim">SQLite Store Online</div>
-      </div>
-    </aside>
-
-    <!-- Main Workspace Viewport -->
-    <main class="aegis-main">
-      <header class="aegis-topbar">
-        <div class="topbar-breadcrumbs">
-          <a href="index.html">Aegis</a>
-          <span>/</span>
-          <span class="current-page">Model Intelligence</span>
-        </div>
-
-        <div class="topbar-actions">
-          <div class="engine-status-chip backend-status-pill">
-            <span class="status-dot-active"></span>
-            <span>FastAPI: ONLINE</span>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/main.css?v=20260925-2" />
+  </head>
+  <body>
+    <div class="aegis-app">
+      <!-- Minimalist Linear / Arc Sidebar -->
+      <aside class="aegis-sidebar">
+        <a href="index.html" class="sidebar-brand">
+          <div class="sidebar-brand-icon">AG</div>
+          <div class="sidebar-brand-title">
+            AEGIS <span class="sidebar-brand-badge">FCU</span>
           </div>
+        </a>
 
-          <div class="analyst-profile-chip">
-            <span class="label">ANALYST:</span>
-            <span class="name">Sarah Lin (Lead)</span>
-          </div>
-        </div>
-      </header>
-
-      <div class="aegis-viewport">
-        <!-- Page Hero -->
-        <div class="page-hero">
+        <div class="sidebar-nav">
           <div>
-            <h1 class="page-title">
-              <i class="bi bi-bar-chart-line text-accent"></i> Model Validation & Global Attributions
-            </h1>
-            <p class="page-subtitle">XGBoost classifier confusion matrix, sensitivity evaluation, and dataset-wide Mean |SHAP| feature rankings.</p>
+            <div class="sidebar-section-title">Command Center</div>
+            <ul class="sidebar-menu">
+              <li>
+                <a href="index.html" class="sidebar-link">
+                  <div class="sidebar-link-inner">
+                    <i class="bi bi-grid-1x2"></i>
+                    <span>Overview</span>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="queue.html" class="sidebar-link">
+                  <div class="sidebar-link-inner">
+                    <i class="bi bi-shield-exclamation"></i>
+                    <span>Fraud Queue</span>
+                  </div>
+                  <span class="sidebar-count-pill" id="sidebar-queue-badge"
+                    >8</span
+                  >
+                </a>
+              </li>
+              <li>
+                <a
+                  href="transaction-detail.html?id=TX-948271"
+                  class="sidebar-link"
+                >
+                  <div class="sidebar-link-inner">
+                    <i class="bi bi-search"></i>
+                    <span>Investigator</span>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="analytics.html" class="sidebar-link active">
+                  <div class="sidebar-link-inner">
+                    <i class="bi bi-bar-chart-line"></i>
+                    <span>Model Intelligence</span>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="simulator.html" class="sidebar-link">
+                  <div class="sidebar-link-inner">
+                    <i class="bi bi-terminal"></i>
+                    <span>Inference Lab</span>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="settings.html" class="sidebar-link">
+                  <div class="sidebar-link-inner">
+                    <i class="bi bi-sliders2"></i>
+                    <span>Risk Policies</span>
+                  </div>
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
 
-        <!-- 4 Model Validation Metrics (ReactBits Philosophy) -->
-        <div class="metrics-row">
-          <div class="stat-card">
-            <span class="stat-card-label">Precision Rate</span>
-            <span class="stat-card-value text-success" id="metric-precision">97.8%</span>
-            <span class="stat-card-sub text-muted">0.21% False Alarm Rate</span>
+        <div class="sidebar-footer">
+          <div class="sidebar-status-indicator">
+            <span class="status-dot-active"></span>
+            <span>XGBOOST 2.4 / SHAP</span>
+          </div>
+          <div class="text-dim">SQLite Store Online</div>
+        </div>
+      </aside>
+
+      <!-- Main Workspace Viewport -->
+      <main class="aegis-main">
+        <header class="aegis-topbar">
+          <div class="topbar-breadcrumbs">
+            <a href="index.html">Aegis</a>
+            <span>/</span>
+            <span class="current-page">Model Intelligence</span>
           </div>
 
-          <div class="stat-card">
-            <span class="stat-card-label">Sensitivity (Recall)</span>
-            <span class="stat-card-value text-accent" id="metric-recall">96.5%</span>
-            <span class="stat-card-sub text-muted">Fraud Capture Ratio</span>
+          <div class="topbar-actions">
+            <button
+              class="theme-toggle"
+              id="themeToggle"
+              type="button"
+              aria-label="Switch to light mode"
+              title="Switch to light mode"
+            >
+              <i class="bi bi-sun" aria-hidden="true"></i
+              ><span>Light mode</span>
+            </button>
+            <div class="engine-status-chip backend-status-pill">
+              <span class="status-dot-active"></span>
+              <span>FastAPI: ONLINE</span>
+            </div>
+
+            <div class="analyst-profile-chip">
+              <span class="label">ANALYST:</span>
+              <span class="name">Sarah Lin (Lead)</span>
+            </div>
+          </div>
+        </header>
+
+        <div class="aegis-viewport">
+          <!-- Page Hero -->
+          <div class="page-hero">
+            <div>
+              <h1 class="page-title">
+                <i class="bi bi-bar-chart-line text-accent"></i> Model
+                Validation & Global Attributions
+              </h1>
+              <p class="page-subtitle">
+                XGBoost classifier confusion matrix, sensitivity evaluation, and
+                dataset-wide Mean |SHAP| feature rankings.
+              </p>
+            </div>
           </div>
 
-          <div class="stat-card">
-            <span class="stat-card-label">F1-Score</span>
-            <span class="stat-card-value text-warning" id="metric-f1">97.1%</span>
-            <span class="stat-card-sub text-muted">Harmonic Balance</span>
+          <!-- 4 Model Validation Metrics (ReactBits Philosophy) -->
+          <div class="metrics-row">
+            <div class="stat-card">
+              <span class="stat-card-label">Precision Rate</span>
+              <span class="stat-card-value text-success" id="metric-precision"
+                >97.8%</span
+              >
+              <span class="stat-card-sub text-muted"
+                >0.21% False Alarm Rate</span
+              >
+            </div>
+
+            <div class="stat-card">
+              <span class="stat-card-label">Sensitivity (Recall)</span>
+              <span class="stat-card-value text-accent" id="metric-recall"
+                >96.5%</span
+              >
+              <span class="stat-card-sub text-muted">Fraud Capture Ratio</span>
+            </div>
+
+            <div class="stat-card">
+              <span class="stat-card-label">F1-Score</span>
+              <span class="stat-card-value text-warning" id="metric-f1"
+                >97.1%</span
+              >
+              <span class="stat-card-sub text-muted">Harmonic Balance</span>
+            </div>
+
+            <div class="stat-card">
+              <span class="stat-card-label">ROC-AUC Metric</span>
+              <span class="stat-card-value" id="metric-roc-auc">0.9984</span>
+              <span class="stat-card-sub text-muted">Separability Index</span>
+            </div>
           </div>
 
-          <div class="stat-card">
-            <span class="stat-card-label">ROC-AUC Metric</span>
-            <span class="stat-card-value" id="metric-roc-auc">0.9984</span>
-            <span class="stat-card-sub text-muted">Separability Index</span>
+          <!-- Charts Grid 1: Monthly Trend & Behavioral vs Traditional -->
+          <div class="charts-grid-2">
+            <div class="aegis-panel" style="margin-bottom: 0">
+              <div class="aegis-panel-header">
+                <h3 class="aegis-panel-title">
+                  <i class="bi bi-calendar3 text-accent"></i> Monthly Anomaly
+                  Volume & Value Exposure
+                </h3>
+              </div>
+              <div class="aegis-panel-body">
+                <div style="height: 220px">
+                  <canvas id="analyticsTrendChart"></canvas>
+                </div>
+              </div>
+            </div>
+
+            <div class="aegis-panel" style="margin-bottom: 0">
+              <div class="aegis-panel-header">
+                <h3 class="aegis-panel-title">
+                  <i class="bi bi-diagram-3 text-warning"></i> Behavioral vs
+                  Transaction Fraud Comparison
+                </h3>
+                <span class="status-pill pill-neutral font-mono"
+                  >Modality Mix</span
+                >
+              </div>
+              <div class="aegis-panel-body">
+                <div style="height: 220px">
+                  <canvas id="behavioralVsTraditionalChart"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Charts Grid 2: Global SHAP & Confusion Matrix -->
+          <div class="charts-grid-2" style="margin-top: 1.25rem">
+            <div class="aegis-panel" style="margin-bottom: 0">
+              <div class="aegis-panel-header">
+                <h3 class="aegis-panel-title">
+                  <i class="bi bi-bar-chart-steps text-accent"></i> Global SHAP
+                  Feature Importance & Behavioral Drivers
+                </h3>
+                <span class="font-mono text-dim" style="font-size: 0.6875rem"
+                  >TreeSHAP Global</span
+                >
+              </div>
+              <div class="aegis-panel-body">
+                <div style="height: 240px">
+                  <canvas id="globalShapChart"></canvas>
+                </div>
+              </div>
+            </div>
+
+            <div class="aegis-panel" style="margin-bottom: 0">
+              <div class="aegis-panel-header">
+                <h3 class="aegis-panel-title">
+                  <i class="bi bi-grid-3x3 text-accent"></i> Validation
+                  Confusion Matrix
+                </h3>
+                <span class="status-pill pill-low">Test Split: 20%</span>
+              </div>
+              <div class="aegis-panel-body">
+                <div
+                  style="
+                    display: grid;
+                    grid-template-columns: auto 1fr 1fr;
+                    gap: 0.4rem;
+                    margin-bottom: 0.75rem;
+                    align-items: center;
+                    font-family: var(--font-mono);
+                    font-size: 0.6875rem;
+                  "
+                >
+                  <div></div>
+                  <div
+                    style="
+                      text-align: center;
+                      color: var(--text-secondary);
+                      font-weight: 600;
+                    "
+                  >
+                    PRED LEGIT
+                  </div>
+                  <div
+                    style="
+                      text-align: center;
+                      color: var(--text-secondary);
+                      font-weight: 600;
+                    "
+                  >
+                    PRED FRAUD
+                  </div>
+
+                  <div
+                    style="
+                      color: var(--text-secondary);
+                      font-weight: 600;
+                      text-align: right;
+                      padding-right: 0.35rem;
+                    "
+                  >
+                    ACTUAL LEGIT
+                  </div>
+                  <div
+                    style="
+                      background: rgba(34, 197, 94, 0.12);
+                      border: 1px solid rgba(34, 197, 94, 0.28);
+                      border-radius: var(--radius-sm);
+                      padding: 0.6rem 0.5rem;
+                      text-align: center;
+                    "
+                  >
+                    <div
+                      class="font-mono text-success"
+                      id="cm-tn"
+                      style="font-size: 1.15rem; font-weight: 700"
+                    >
+                      6,354,407
+                    </div>
+                    <div
+                      class="text-success"
+                      style="font-size: 0.6875rem; font-weight: 600"
+                    >
+                      True Negatives (TN)
+                    </div>
+                    <div
+                      class="text-dim"
+                      id="cm-tn-rate"
+                      style="font-size: 0.625rem"
+                    >
+                      99.99% Specificity
+                    </div>
+                  </div>
+                  <div
+                    style="
+                      background: rgba(245, 158, 11, 0.08);
+                      border: 1px solid rgba(245, 158, 11, 0.22);
+                      border-radius: var(--radius-sm);
+                      padding: 0.6rem 0.5rem;
+                      text-align: center;
+                    "
+                  >
+                    <div
+                      class="font-mono text-warning"
+                      id="cm-fp"
+                      style="font-size: 1.15rem; font-weight: 700"
+                    >
+                      180
+                    </div>
+                    <div
+                      class="text-warning"
+                      style="font-size: 0.6875rem; font-weight: 600"
+                    >
+                      False Positives (FP)
+                    </div>
+                    <div
+                      class="text-dim"
+                      id="cm-fp-rate"
+                      style="font-size: 0.625rem"
+                    >
+                      0.21% False Alarm (Type I)
+                    </div>
+                  </div>
+
+                  <div
+                    style="
+                      color: var(--text-secondary);
+                      font-weight: 600;
+                      text-align: right;
+                      padding-right: 0.35rem;
+                    "
+                  >
+                    ACTUAL FRAUD
+                  </div>
+                  <div
+                    style="
+                      background: rgba(239, 68, 68, 0.08);
+                      border: 1px solid rgba(239, 68, 68, 0.22);
+                      border-radius: var(--radius-sm);
+                      padding: 0.6rem 0.5rem;
+                      text-align: center;
+                    "
+                  >
+                    <div
+                      class="font-mono text-danger"
+                      id="cm-fn"
+                      style="font-size: 1.15rem; font-weight: 700"
+                    >
+                      287
+                    </div>
+                    <div
+                      class="text-danger"
+                      style="font-size: 0.6875rem; font-weight: 600"
+                    >
+                      False Negatives (FN)
+                    </div>
+                    <div
+                      class="text-dim"
+                      id="cm-fn-rate"
+                      style="font-size: 0.625rem"
+                    >
+                      3.50% Missed Fraud (Type II)
+                    </div>
+                  </div>
+                  <div
+                    style="
+                      background: rgba(239, 68, 68, 0.2);
+                      border: 1px solid rgba(239, 68, 68, 0.38);
+                      border-radius: var(--radius-sm);
+                      padding: 0.6rem 0.5rem;
+                      text-align: center;
+                    "
+                  >
+                    <div
+                      class="font-mono text-danger"
+                      id="cm-tp"
+                      style="font-size: 1.15rem; font-weight: 700"
+                    >
+                      7,926
+                    </div>
+                    <div
+                      class="text-danger"
+                      style="font-size: 0.6875rem; font-weight: 600"
+                    >
+                      True Positives (TP)
+                    </div>
+                    <div
+                      class="text-dim"
+                      id="cm-tp-rate"
+                      style="font-size: 0.625rem"
+                    >
+                      96.50% Sensitivity
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="font-mono text-dim"
+                  style="
+                    font-size: 0.6875rem;
+                    border-top: 1px solid var(--border-base);
+                    padding-top: 0.5rem;
+                  "
+                >
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: space-between;
+                      padding: 0.15rem 0;
+                    "
+                  >
+                    <span>Inference Latency:</span>
+                    <span class="text-accent fw-bold">12.4 ms (p95)</span>
+                  </div>
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: space-between;
+                      padding: 0.15rem 0;
+                    "
+                  >
+                    <span>TreeSHAP Computation:</span>
+                    <span class="text-accent fw-bold">28.1 ms (p95)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Charts Grid 3: Behavioral Detection Telemetry (Velocity, Structuring, Recipient Risk) -->
+          <div class="analytics-telemetry-grid">
+            <!-- Velocity Risk Distribution -->
+            <div class="aegis-panel" style="margin-bottom: 0">
+              <div class="aegis-panel-header">
+                <h3 class="aegis-panel-title">
+                  <i class="bi bi-lightning-charge-fill text-warning"></i>
+                  Velocity Risk Distribution
+                </h3>
+              </div>
+              <div class="aegis-panel-body">
+                <div style="height: 200px">
+                  <canvas id="velocityDistChart"></canvas>
+                </div>
+              </div>
+            </div>
+
+            <!-- Structuring Detection Statistics -->
+            <div class="aegis-panel" style="margin-bottom: 0">
+              <div class="aegis-panel-header">
+                <h3 class="aegis-panel-title">
+                  <i class="bi bi-layers-fill text-accent"></i> Structuring
+                  Statistics
+                </h3>
+              </div>
+              <div class="aegis-panel-body">
+                <div style="height: 200px">
+                  <canvas id="structuringStatsChart"></canvas>
+                </div>
+              </div>
+            </div>
+
+            <!-- Recipient Risk Distribution -->
+            <div class="aegis-panel" style="margin-bottom: 0">
+              <div class="aegis-panel-header">
+                <h3 class="aegis-panel-title">
+                  <i class="bi bi-person-exclamation text-danger"></i> Recipient
+                  Risk Distribution
+                </h3>
+              </div>
+              <div class="aegis-panel-body">
+                <div style="height: 200px">
+                  <canvas id="recipientRiskDistChart"></canvas>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
+      </main>
+    </div>
 
-        <!-- Charts Grid 1: Monthly Trend & Behavioral vs Traditional -->
-        <div class="charts-grid-2">
-          <div class="aegis-panel" style="margin-bottom: 0;">
-            <div class="aegis-panel-header">
-              <h3 class="aegis-panel-title">
-                <i class="bi bi-calendar3 text-accent"></i> Monthly Anomaly Volume & Value Exposure
-              </h3>
-            </div>
-            <div class="aegis-panel-body">
-              <div style="height: 220px;">
-                <canvas id="analyticsTrendChart"></canvas>
-              </div>
-            </div>
-          </div>
+    <div id="toast-container" class="toast-container-custom"></div>
 
-          <div class="aegis-panel" style="margin-bottom: 0;">
-            <div class="aegis-panel-header">
-              <h3 class="aegis-panel-title">
-                <i class="bi bi-diagram-3 text-warning"></i> Behavioral vs Transaction Fraud Comparison
-              </h3>
-              <span class="status-pill pill-neutral font-mono">Modality Mix</span>
-            </div>
-            <div class="aegis-panel-body">
-              <div style="height: 220px;">
-                <canvas id="behavioralVsTraditionalChart"></canvas>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Charts Grid 2: Global SHAP & Confusion Matrix -->
-        <div class="charts-grid-2" style="margin-top: 1.25rem;">
-          <div class="aegis-panel" style="margin-bottom: 0;">
-            <div class="aegis-panel-header">
-              <h3 class="aegis-panel-title">
-                <i class="bi bi-bar-chart-steps text-accent"></i> Global SHAP Feature Importance & Behavioral Drivers
-              </h3>
-              <span class="font-mono text-dim" style="font-size: 0.6875rem;">TreeSHAP Global</span>
-            </div>
-            <div class="aegis-panel-body">
-              <div style="height: 240px;">
-                <canvas id="globalShapChart"></canvas>
-              </div>
-            </div>
-          </div>
-
-          <div class="aegis-panel" style="margin-bottom: 0;">
-            <div class="aegis-panel-header">
-              <h3 class="aegis-panel-title">
-                <i class="bi bi-grid-3x3 text-accent"></i> Validation Confusion Matrix
-              </h3>
-              <span class="status-pill pill-low">Test Split: 20%</span>
-            </div>
-            <div class="aegis-panel-body">
-              <div style="display: grid; grid-template-columns: auto 1fr 1fr; gap: 0.4rem; margin-bottom: 0.75rem; align-items: center; font-family: var(--font-mono); font-size: 0.6875rem;">
-                <div></div>
-                <div style="text-align: center; color: var(--text-secondary); font-weight: 600;">PRED LEGIT</div>
-                <div style="text-align: center; color: var(--text-secondary); font-weight: 600;">PRED FRAUD</div>
-
-                <div style="color: var(--text-secondary); font-weight: 600; text-align: right; padding-right: 0.35rem;">ACTUAL LEGIT</div>
-                <div style="background: rgba(34, 197, 94, 0.12); border: 1px solid rgba(34, 197, 94, 0.28); border-radius: var(--radius-sm); padding: 0.6rem 0.5rem; text-align: center;">
-                  <div class="font-mono text-success" id="cm-tn" style="font-size: 1.15rem; font-weight: 700;">6,354,407</div>
-                  <div class="text-success" style="font-size: 0.6875rem; font-weight: 600;">True Negatives (TN)</div>
-                  <div class="text-dim" id="cm-tn-rate" style="font-size: 0.625rem;">99.99% Specificity</div>
-                </div>
-                <div style="background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.22); border-radius: var(--radius-sm); padding: 0.6rem 0.5rem; text-align: center;">
-                  <div class="font-mono text-warning" id="cm-fp" style="font-size: 1.15rem; font-weight: 700;">180</div>
-                  <div class="text-warning" style="font-size: 0.6875rem; font-weight: 600;">False Positives (FP)</div>
-                  <div class="text-dim" id="cm-fp-rate" style="font-size: 0.625rem;">0.21% False Alarm (Type I)</div>
-                </div>
-
-                <div style="color: var(--text-secondary); font-weight: 600; text-align: right; padding-right: 0.35rem;">ACTUAL FRAUD</div>
-                <div style="background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.22); border-radius: var(--radius-sm); padding: 0.6rem 0.5rem; text-align: center;">
-                  <div class="font-mono text-danger" id="cm-fn" style="font-size: 1.15rem; font-weight: 700;">287</div>
-                  <div class="text-danger" style="font-size: 0.6875rem; font-weight: 600;">False Negatives (FN)</div>
-                  <div class="text-dim" id="cm-fn-rate" style="font-size: 0.625rem;">3.50% Missed Fraud (Type II)</div>
-                </div>
-                <div style="background: rgba(239, 68, 68, 0.20); border: 1px solid rgba(239, 68, 68, 0.38); border-radius: var(--radius-sm); padding: 0.6rem 0.5rem; text-align: center;">
-                  <div class="font-mono text-danger" id="cm-tp" style="font-size: 1.15rem; font-weight: 700;">7,926</div>
-                  <div class="text-danger" style="font-size: 0.6875rem; font-weight: 600;">True Positives (TP)</div>
-                  <div class="text-dim" id="cm-tp-rate" style="font-size: 0.625rem;">96.50% Sensitivity</div>
-                </div>
-              </div>
-
-              <div class="font-mono text-dim" style="font-size: 0.6875rem; border-top: 1px solid var(--border-base); padding-top: 0.5rem;">
-                <div style="display: flex; justify-content: space-between; padding: 0.15rem 0;">
-                  <span>Inference Latency:</span>
-                  <span class="text-accent fw-bold">12.4 ms (p95)</span>
-                </div>
-                <div style="display: flex; justify-content: space-between; padding: 0.15rem 0;">
-                  <span>TreeSHAP Computation:</span>
-                  <span class="text-accent fw-bold">28.1 ms (p95)</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Charts Grid 3: Behavioral Detection Telemetry (Velocity, Structuring, Recipient Risk) -->
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 1.25rem;">
-          <!-- Velocity Risk Distribution -->
-          <div class="aegis-panel" style="margin-bottom: 0;">
-            <div class="aegis-panel-header">
-              <h3 class="aegis-panel-title">
-                <i class="bi bi-lightning-charge-fill text-warning"></i> Velocity Risk Distribution
-              </h3>
-            </div>
-            <div class="aegis-panel-body">
-              <div style="height: 200px;">
-                <canvas id="velocityDistChart"></canvas>
-              </div>
-            </div>
-          </div>
-
-          <!-- Structuring Detection Statistics -->
-          <div class="aegis-panel" style="margin-bottom: 0;">
-            <div class="aegis-panel-header">
-              <h3 class="aegis-panel-title">
-                <i class="bi bi-layers-fill text-accent"></i> Structuring Statistics
-              </h3>
-            </div>
-            <div class="aegis-panel-body">
-              <div style="height: 200px;">
-                <canvas id="structuringStatsChart"></canvas>
-              </div>
-            </div>
-          </div>
-
-          <!-- Recipient Risk Distribution -->
-          <div class="aegis-panel" style="margin-bottom: 0;">
-            <div class="aegis-panel-header">
-              <h3 class="aegis-panel-title">
-                <i class="bi bi-person-exclamation text-danger"></i> Recipient Risk Distribution
-              </h3>
-            </div>
-            <div class="aegis-panel-body">
-              <div style="height: 200px;">
-                <canvas id="recipientRiskDistChart"></canvas>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </main>
-  </div>
-
-  <div id="toast-container" class="toast-container-custom"></div>
-
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="js/config.js"></script>
-  <script src="js/toast.js"></script>
-  <script src="js/theme.js"></script>
-  <script src="js/api.js"></script>
-  <script src="js/charts.js"></script>
-  <script src="js/analytics.js"></script>
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/toast.js"></script>
+    <script src="js/theme.js?v=20260925-2"></script>
+    <script src="js/api.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/analytics.js"></script>
+  </body>
 </html>

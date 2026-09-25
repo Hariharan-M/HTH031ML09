@@ -1,0 +1,193 @@
+AEGIS RISK INTELLIGENCE
+PROJECT EXPLANATION
+
+1. What the Web Application Does
+
+Aegis Risk Intelligence is a fraud detection and transaction investigation web application. It is designed for financial crime teams, fraud analysts, risk teams, and security operations teams.
+
+The application watches financial transactions and highlights activity that may be fraudulent or unusual. It gives analysts a central place to see risk levels, understand why a transaction was flagged, investigate a case, and decide what action should be taken.
+
+The application is useful for:
+
+- Finding suspicious transfers and other unusual transactions.
+- Prioritizing the cases that need attention first.
+- Understanding the reasons behind a fraud warning.
+- Reviewing account balances before and after a transaction.
+- Checking whether a recipient account has a suspicious history.
+- Freezing an account when immediate protection is needed.
+- Resolving a legitimate case or marking a warning as a false positive.
+- Escalating serious cases to senior investigators.
+- Testing hypothetical transactions before they are approved.
+- Monitoring fraud trends, losses, and model performance.
+- Managing risk rules and review thresholds.
+- Exporting transaction information for reporting and compliance work.
+
+2. Who Uses It
+
+The main user is a fraud or financial crime analyst. An analyst can use the application to monitor incoming alerts, investigate individual transactions, record decisions, and protect customers from suspicious transfers.
+
+Managers and risk engineers can use the overview and model pages to monitor the overall fraud situation, review detection performance, and adjust risk policies.
+
+3. Main Pages and Their Uses
+
+3.1 Executive Overview
+
+The Executive Overview is the main command center. It gives a quick picture of the current fraud situation.
+
+It shows:
+
+- The total number of transactions processed.
+- The number of transactions flagged as suspicious.
+- The current active investigation queue.
+- The estimated financial exposure from risky activity.
+- Live security alerts that still need attention.
+- Recent changes in fraud volume and expected loss.
+- The types of transaction channels involved in fraud.
+- A short list of the most important cases waiting for review.
+
+The overview is useful at the beginning of a shift or during an incident because it helps an analyst understand the current workload without opening every case.
+
+3.2 Fraud Triage Queue
+
+The Fraud Triage Queue is the analyst's worklist. It contains transactions that have been identified as suspicious or require a decision.
+
+An analyst can:
+
+- Search for a case by case ID, account, or reason.
+- Filter cases by fraud category.
+- Filter by risk level.
+- Filter by transaction channel, such as transfer or cash withdrawal.
+- View active, frozen, resolved, and false-positive cases.
+- Compare transaction amount, velocity, structuring, recipient risk, and final risk.
+- Open a case for a detailed investigation.
+- Freeze an account when the activity appears dangerous.
+- Resolve a case when the transaction is legitimate or handled.
+- Mark a case as a false positive for future model improvement.
+- Refresh the queue to see the latest stored case information.
+- Export the queue data as a CSV report.
+
+The queue helps analysts work in priority order instead of manually searching through all transactions.
+
+3.3 Case Investigator
+
+The Case Investigator is the detailed view for one transaction. It is used when an analyst needs to understand the full story behind a fraud alert.
+
+It presents:
+
+- The case ID, current status, risk score, and risk level.
+- The sender and recipient account information.
+- The sender balance before and after the transaction.
+- The recipient balance before and after the transaction.
+- The transaction amount and channel.
+- Whether the sender account was emptied.
+- Whether the transaction is unusually large.
+- Recent transaction counts and amounts.
+- Recipient behavior and reputation information.
+- The main factors that contributed to the risk decision.
+- A history of previous analyst actions and notes.
+
+From this page, the analyst can:
+
+- Freeze the originating account.
+- Resolve the case.
+- Mark the case as a false positive.
+- Escalate the case for higher-level review.
+- Add investigation notes and assign responsibility.
+- Print or save a case investigation dossier.
+
+This page supports a documented and explainable decision instead of relying only on a warning label.
+
+3.4 Model Intelligence
+
+Model Intelligence is the monitoring and evaluation page for the fraud detection system. It is mainly useful for risk managers, model owners, and technical fraud specialists.
+
+It shows:
+
+- How accurately the system identifies fraud.
+- How many legitimate transactions are incorrectly flagged.
+- How much fraud is missed.
+- How well the system separates legitimate and fraudulent activity.
+- Monthly fraud volume and estimated exposure.
+- The balance between behavioral fraud and traditional transaction fraud.
+- The most important warning indicators used in decisions.
+- How velocity, structuring, and recipient risk are distributed.
+- A confusion matrix showing correct and incorrect classifications.
+
+This page helps the organization understand whether the fraud detection service is reliable and which behaviors are driving alerts.
+
+3.5 Inference Lab
+
+The Inference Lab is a testing and simulation workspace. It allows an analyst to enter or modify transaction details and immediately see how the system would assess the scenario.
+
+An analyst can change:
+
+- Sender and recipient accounts.
+- Transaction amount.
+- Transaction channel.
+- Sender and recipient balances.
+- Recent transaction counts.
+- Recent transaction amounts.
+- Other behavioral details related to the transfer.
+
+The page includes example scenarios such as:
+
+- A large account drain.
+- A sudden burst of transactions.
+- Structuring or smurfing activity.
+- Transfers to many recipients.
+- A high-risk mule recipient.
+- A normal retail transfer.
+
+The result includes a risk score, a risk category, the main reasons for the result, and an indication of whether the recipient should be treated with caution.
+
+The Inference Lab is useful for training analysts, testing unusual situations, checking proposed transactions, and demonstrating how different transaction details affect risk.
+
+3.6 Risk Policies
+
+Risk Policies is the configuration page for fraud review rules. It allows authorized users to adjust how risk levels are assigned and when additional action is required.
+
+Users can configure:
+
+- The critical-risk threshold for automatic escalation.
+- The high-risk threshold for analyst review.
+- The medium-risk threshold for additional verification.
+- The rule that flags an account emptied to zero.
+- The rule that escalates high-value wire transfers.
+- The rule that applies a short response time to rapid beneficiary transfers.
+- The API connection used by the application.
+
+The page also provides a diagnostic check to confirm that the application services are available. Saving policy settings allows the organization to align the application with its current fraud response procedures.
+
+4. How the Application Helps an Analyst
+
+The application combines several kinds of evidence when reviewing a transaction:
+
+- The transaction's predicted likelihood of fraud.
+- The size and possible financial impact of the transaction.
+- Whether the sender's account was drained.
+- Whether the transaction channel is commonly associated with fraud.
+- How quickly transactions are being made.
+- Whether many recipients are being used in a short time.
+- Whether the recipient has a suspicious or high-risk history.
+- Whether the transaction resembles known fraud patterns.
+
+The result is presented as a risk score and risk level. The system also provides reasons so that an analyst can understand the warning and make an accountable decision.
+
+5. Typical User Workflow
+
+1. The analyst opens the Executive Overview to check current alerts, exposure, and queue size.
+2. The analyst opens the Fraud Triage Queue and filters or sorts cases by urgency.
+3. The analyst selects a suspicious case to open the Case Investigator page.
+4. The analyst reviews the transaction amount, account balances, recipient information, behavior, and risk reasons.
+5. The analyst chooses an action: freeze the account, resolve the case, mark it as a false positive, or escalate it.
+6. The analyst records notes or assigns the case when more investigation is needed.
+7. The team monitors decisions and fraud trends through the Model Intelligence page.
+8. Analysts can use the Inference Lab to test similar transactions or train new team members.
+9. Risk managers can update thresholds and operating rules in Risk Policies.
+10. Transaction and case information can be exported for reporting, audit, and compliance activities.
+
+6. Business Value
+
+Aegis helps financial organizations respond to suspicious activity faster and more consistently. It reduces the time needed to find important cases, gives analysts evidence for their decisions, creates a record of case actions, and helps protect accounts and customers from financial loss.
+
+The application is not only a fraud detector. It is a complete fraud operations workspace for monitoring, investigation, decision-making, simulation, policy control, and reporting.

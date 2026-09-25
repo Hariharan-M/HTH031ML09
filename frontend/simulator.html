@@ -1,375 +1,896 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" data-theme="dark">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Inference Lab | Aegis Risk Intelligence</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/main.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inference Lab | Aegis Risk Intelligence</title>
 
-  <div class="aegis-app">
-    <!-- Minimalist Linear / Arc Sidebar -->
-    <aside class="aegis-sidebar">
-      <a href="index.html" class="sidebar-brand">
-        <div class="sidebar-brand-icon">AG</div>
-        <div class="sidebar-brand-title">
-          AEGIS <span class="sidebar-brand-badge">FCU</span>
-        </div>
-      </a>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
-      <div class="sidebar-nav">
-        <div>
-          <div class="sidebar-section-title">Command Center</div>
-          <ul class="sidebar-menu">
-            <li>
-              <a href="index.html" class="sidebar-link">
-                <div class="sidebar-link-inner">
-                  <i class="bi bi-grid-1x2"></i>
-                  <span>Overview</span>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="queue.html" class="sidebar-link">
-                <div class="sidebar-link-inner">
-                  <i class="bi bi-shield-exclamation"></i>
-                  <span>Fraud Queue</span>
-                </div>
-                <span class="sidebar-count-pill" id="sidebar-queue-badge">8</span>
-              </a>
-            </li>
-            <li>
-              <a href="transaction-detail.html?id=TX-948271" class="sidebar-link">
-                <div class="sidebar-link-inner">
-                  <i class="bi bi-search"></i>
-                  <span>Investigator</span>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="analytics.html" class="sidebar-link">
-                <div class="sidebar-link-inner">
-                  <i class="bi bi-bar-chart-line"></i>
-                  <span>Model Intelligence</span>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="simulator.html" class="sidebar-link active">
-                <div class="sidebar-link-inner">
-                  <i class="bi bi-terminal"></i>
-                  <span>Inference Lab</span>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="settings.html" class="sidebar-link">
-                <div class="sidebar-link-inner">
-                  <i class="bi bi-sliders2"></i>
-                  <span>Risk Policies</span>
-                </div>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="sidebar-footer">
-        <div class="sidebar-status-indicator">
-          <span class="status-dot-active"></span>
-          <span>XGBOOST 2.4 / SHAP</span>
-        </div>
-        <div class="text-dim">SQLite Store Online</div>
-      </div>
-    </aside>
-
-    <!-- Main Workspace Viewport -->
-    <main class="aegis-main">
-      <header class="aegis-topbar">
-        <div class="topbar-breadcrumbs">
-          <a href="index.html">Aegis</a>
-          <span>/</span>
-          <span class="current-page">Inference Lab</span>
-        </div>
-
-        <div class="topbar-actions">
-          <div class="engine-status-chip backend-status-pill">
-            <span class="status-dot-active"></span>
-            <span>FastAPI: ONLINE</span>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/main.css?v=20260925-2" />
+  </head>
+  <body>
+    <div class="aegis-app">
+      <!-- Minimalist Linear / Arc Sidebar -->
+      <aside class="aegis-sidebar">
+        <a href="index.html" class="sidebar-brand">
+          <div class="sidebar-brand-icon">AG</div>
+          <div class="sidebar-brand-title">
+            AEGIS <span class="sidebar-brand-badge">FCU</span>
           </div>
+        </a>
 
-          <div class="analyst-profile-chip">
-            <span class="label">ANALYST:</span>
-            <span class="name">Sarah Lin (Lead)</span>
-          </div>
-        </div>
-      </header>
-
-      <div class="aegis-viewport">
-        <!-- Page Hero -->
-        <div class="page-hero">
+        <div class="sidebar-nav">
           <div>
-            <h1 class="page-title">
-              <i class="bi bi-terminal text-accent"></i> Real-Time Inference Lab
-            </h1>
-            <p class="page-subtitle">Simulate arbitrary transaction payloads against the XGBoost ensemble with instant TreeSHAP attribution and risk advisory guidance.</p>
+            <div class="sidebar-section-title">Command Center</div>
+            <ul class="sidebar-menu">
+              <li>
+                <a href="index.html" class="sidebar-link">
+                  <div class="sidebar-link-inner">
+                    <i class="bi bi-grid-1x2"></i>
+                    <span>Overview</span>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="queue.html" class="sidebar-link">
+                  <div class="sidebar-link-inner">
+                    <i class="bi bi-shield-exclamation"></i>
+                    <span>Fraud Queue</span>
+                  </div>
+                  <span class="sidebar-count-pill" id="sidebar-queue-badge"
+                    >8</span
+                  >
+                </a>
+              </li>
+              <li>
+                <a
+                  href="transaction-detail.html?id=TX-948271"
+                  class="sidebar-link"
+                >
+                  <div class="sidebar-link-inner">
+                    <i class="bi bi-search"></i>
+                    <span>Investigator</span>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="analytics.html" class="sidebar-link">
+                  <div class="sidebar-link-inner">
+                    <i class="bi bi-bar-chart-line"></i>
+                    <span>Model Intelligence</span>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="simulator.html" class="sidebar-link active">
+                  <div class="sidebar-link-inner">
+                    <i class="bi bi-terminal"></i>
+                    <span>Inference Lab</span>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="settings.html" class="sidebar-link">
+                  <div class="sidebar-link-inner">
+                    <i class="bi bi-sliders2"></i>
+                    <span>Risk Policies</span>
+                  </div>
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
 
-        <!-- Scenario Presets Bar -->
-        <div class="aegis-panel" style="margin-bottom: 1.25rem;">
-          <div class="aegis-panel-body" style="padding: 0.65rem 0.85rem;">
-            <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
-              <span class="text-dim font-mono fw-semibold" style="font-size: 0.6875rem;">BEHAVIORAL SCENARIOS:</span>
-              <button class="aegis-btn active" data-preset="wire_drain">
-                <i class="bi bi-shield-slash text-danger"></i> Wire Drain
-              </button>
-              <button class="aegis-btn" data-preset="velocity_burst">
-                <i class="bi bi-lightning-charge-fill text-warning"></i> ⚡ Velocity Burst (25tx/30m)
-              </button>
-              <button class="aegis-btn" data-preset="structuring_smurfing">
-                <i class="bi bi-layers-fill text-accent"></i> 🧱 Structuring / Smurfing
-              </button>
-              <button class="aegis-btn" data-preset="recipient_burst">
-                <i class="bi bi-diagram-3-fill text-primary"></i> 🎯 Recipient Fan-Out
-              </button>
-              <button class="aegis-btn" data-preset="mule_recipient">
-                <i class="bi bi-exclamation-triangle-fill text-danger"></i> ⚠️ High-Risk Mule
-              </button>
-              <button class="aegis-btn" data-preset="normal_retail">
-                <i class="bi bi-check2 text-success"></i> Retail Transfer
-              </button>
+        <div class="sidebar-footer">
+          <div class="sidebar-status-indicator">
+            <span class="status-dot-active"></span>
+            <span>XGBOOST 2.4 / SHAP</span>
+          </div>
+          <div class="text-dim">SQLite Store Online</div>
+        </div>
+      </aside>
+
+      <!-- Main Workspace Viewport -->
+      <main class="aegis-main">
+        <header class="aegis-topbar">
+          <div class="topbar-breadcrumbs">
+            <a href="index.html">Aegis</a>
+            <span>/</span>
+            <span class="current-page">Inference Lab</span>
+          </div>
+
+          <div class="topbar-actions">
+            <button
+              class="theme-toggle"
+              id="themeToggle"
+              type="button"
+              aria-label="Switch to light mode"
+              title="Switch to light mode"
+            >
+              <i class="bi bi-sun" aria-hidden="true"></i
+              ><span>Light mode</span>
+            </button>
+            <div class="engine-status-chip backend-status-pill">
+              <span class="status-dot-active"></span>
+              <span>FastAPI: ONLINE</span>
+            </div>
+
+            <div class="analyst-profile-chip">
+              <span class="label">ANALYST:</span>
+              <span class="name">Sarah Lin (Lead)</span>
             </div>
           </div>
-        </div>
+        </header>
 
-        <!-- Customer Safety Pre-Transfer Advisory Banner -->
-        <div id="safety-advisory-banner" style="display: none; margin-bottom: 1.25rem; background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: var(--radius-sm); padding: 0.85rem 1rem;">
-          <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem;">
-            <div style="display: flex; gap: 0.75rem;">
-              <i class="bi bi-shield-exclamation text-danger" style="font-size: 1.25rem; margin-top: 2px;"></i>
-              <div>
-                <div class="fw-bold text-danger font-mono" style="font-size: 0.8125rem;">CUSTOMER SAFETY WARNING</div>
-                <div style="font-size: 0.775rem; color: #fecaca; margin-top: 2px;" id="safety-advisory-text">
-                  Warning: This recipient account has previously been linked to suspicious or fraudulent activity. Proceed with caution.
-                </div>
+        <div class="aegis-viewport">
+          <!-- Page Hero -->
+          <div class="page-hero">
+            <div>
+              <h1 class="page-title">
+                <i class="bi bi-terminal text-accent"></i> Real-Time Inference
+                Lab
+              </h1>
+              <p class="page-subtitle">
+                Simulate arbitrary transaction payloads against the XGBoost
+                ensemble with instant TreeSHAP attribution and risk advisory
+                guidance.
+              </p>
+            </div>
+          </div>
+
+          <!-- Scenario Presets Bar -->
+          <div class="aegis-panel" style="margin-bottom: 1.25rem">
+            <div class="aegis-panel-body" style="padding: 0.65rem 0.85rem">
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 0.5rem;
+                  flex-wrap: wrap;
+                "
+              >
+                <span
+                  class="text-dim font-mono fw-semibold"
+                  style="font-size: 0.6875rem"
+                  >BEHAVIORAL SCENARIOS:</span
+                >
+                <button class="aegis-btn active" data-preset="wire_drain">
+                  <i class="bi bi-shield-slash text-danger"></i> Wire Drain
+                </button>
+                <button class="aegis-btn" data-preset="velocity_burst">
+                  <i class="bi bi-lightning-charge-fill text-warning"></i> ⚡
+                  Velocity Burst (25tx/30m)
+                </button>
+                <button class="aegis-btn" data-preset="structuring_smurfing">
+                  <i class="bi bi-layers-fill text-accent"></i> 🧱 Structuring /
+                  Smurfing
+                </button>
+                <button class="aegis-btn" data-preset="recipient_burst">
+                  <i class="bi bi-diagram-3-fill text-primary"></i> 🎯 Recipient
+                  Fan-Out
+                </button>
+                <button class="aegis-btn" data-preset="mule_recipient">
+                  <i class="bi bi-exclamation-triangle-fill text-danger"></i> ⚠️
+                  High-Risk Mule
+                </button>
+                <button class="aegis-btn" data-preset="normal_retail">
+                  <i class="bi bi-check2 text-success"></i> Retail Transfer
+                </button>
               </div>
             </div>
-            <div style="display: flex; gap: 0.5rem; flex-shrink: 0;">
-              <button type="button" class="aegis-btn aegis-btn-danger" id="safety-proceed-btn" style="font-size: 0.7rem; padding: 3px 10px;">
-                Confirm & Proceed
-              </button>
-              <button type="button" class="aegis-btn" id="safety-cancel-btn" style="font-size: 0.7rem; padding: 3px 10px;">
-                Cancel Transfer
-              </button>
-            </div>
           </div>
-        </div>
 
-        <!-- Two Column Form & Output Grid -->
-        <div class="charts-grid-2" style="grid-template-columns: 1fr 1fr; align-items: start;">
-          
-          <!-- LEFT COLUMN: Input Vector -->
-          <div class="aegis-panel" style="margin-bottom: 0;">
-            <div class="aegis-panel-header">
-              <h3 class="aegis-panel-title">
-                <i class="bi bi-sliders text-accent"></i> Transaction & Behavioral Vector
-              </h3>
-              <span class="status-pill pill-neutral font-mono">Inference Parameters</span>
-            </div>
-            <div class="aegis-panel-body">
-              <form id="simulatorForm">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 0.75rem;">
-                  <div>
-                    <label class="text-dim font-mono" style="font-size: 0.6875rem; display: block; margin-bottom: 0.25rem;">ORIGIN ACCOUNT</label>
-                    <input type="text" id="sim-origAccount" class="aegis-input font-mono" value="C847291039" required>
-                  </div>
-                  <div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
-                      <label class="text-dim font-mono" style="font-size: 0.6875rem;">RECIPIENT ACCOUNT</label>
-                      <button type="button" id="btn-pre-check-safety" class="aegis-btn" style="font-size: 0.6rem; padding: 1px 6px;">
-                        <i class="bi bi-shield-check"></i> Safety Check
-                      </button>
-                    </div>
-                    <input type="text" id="sim-destAccount" class="aegis-input font-mono" value="M928371029" required>
-                  </div>
-                  <div>
-                    <label class="text-dim font-mono" style="font-size: 0.6875rem; display: block; margin-bottom: 0.25rem;">AMOUNT ($ USD)</label>
-                    <input type="number" id="sim-amount" class="aegis-input font-mono" value="850000" step="0.01" required>
-                  </div>
-                  <div>
-                    <label class="text-dim font-mono" style="font-size: 0.6875rem; display: block; margin-bottom: 0.25rem;">CHANNEL TYPE</label>
-                    <select id="sim-type" class="aegis-select font-mono">
-                      <option value="4">4 - TRANSFER</option>
-                      <option value="1">1 - CASH_OUT</option>
-                      <option value="3">3 - PAYMENT</option>
-                      <option value="2">2 - DEBIT</option>
-                      <option value="0">0 - CASH_IN</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label class="text-dim font-mono" style="font-size: 0.6875rem; display: block; margin-bottom: 0.25rem;">STEP (HOURLY UNIT)</label>
-                    <input type="number" id="sim-step" class="aegis-input font-mono" value="300" required>
-                  </div>
-                  <div>
-                    <label class="text-dim font-mono" style="font-size: 0.6875rem; display: block; margin-bottom: 0.25rem;">TXS LAST HOUR / DAY</label>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px;">
-                      <input type="number" id="sim-tx-hour" class="aegis-input font-mono" value="1" placeholder="Hour" min="1">
-                      <input type="number" id="sim-tx-day" class="aegis-input font-mono" value="2" placeholder="Day" min="1">
-                    </div>
-                  </div>
-                  <div>
-                    <label class="text-dim font-mono" style="font-size: 0.6875rem; display: block; margin-bottom: 0.25rem;">ORIGIN PRE-BALANCE ($)</label>
-                    <input type="number" id="sim-oldbalanceOrg" class="aegis-input font-mono" value="850000" step="0.01" required>
-                  </div>
-                  <div>
-                    <label class="text-dim font-mono" style="font-size: 0.6875rem; display: block; margin-bottom: 0.25rem;">ORIGIN POST-BALANCE ($)</label>
-                    <input type="number" id="sim-newbalanceOrig" class="aegis-input font-mono" value="0" step="0.01" required>
-                  </div>
-                  <div>
-                    <label class="text-dim font-mono" style="font-size: 0.6875rem; display: block; margin-bottom: 0.25rem;">DEST PRE-BALANCE ($)</label>
-                    <input type="number" id="sim-oldbalanceDest" class="aegis-input font-mono" value="0" step="0.01" required>
-                  </div>
-                  <div>
-                    <label class="text-dim font-mono" style="font-size: 0.6875rem; display: block; margin-bottom: 0.25rem;">DEST POST-BALANCE ($)</label>
-                    <input type="number" id="sim-newbalanceDest" class="aegis-input font-mono" value="850000" step="0.01" required>
-                  </div>
-                </div>
-
-                <!-- Structuring Batch Simulation Field -->
-                <div style="margin-bottom: 0.75rem;">
-                  <label class="text-dim font-mono" style="font-size: 0.6875rem; display: block; margin-bottom: 0.25rem;">
-                    RECENT BATCH AMOUNTS (FOR STRUCTURING / SMURFING TEST)
-                  </label>
-                  <input type="text" id="sim-recent-amounts" class="aegis-input font-mono" value="850000" placeholder="e.g. 1000, 1200, 1500, 900, 1400">
-                </div>
-
-                <!-- Auto-Derived Features Box -->
-                <div style="background: var(--bg-app); border: 1px solid var(--border-base); border-radius: var(--radius-sm); padding: 0.75rem; margin-bottom: 1rem; font-family: var(--font-mono); font-size: 0.6875rem;">
-                  <div class="text-dim fw-bold mb-1" style="margin-bottom: 0.35rem;">ENGINEERED ATTRIBUTES:</div>
-                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.35rem;">
-                    <div class="text-secondary">balanceDiffOrig: <span class="fw-bold text-primary" id="derived-diff-orig">$850,000.00</span></div>
-                    <div class="text-secondary">balanceDiffDest: <span class="fw-bold text-primary" id="derived-diff-dest">$850,000.00</span></div>
-                    <div class="text-secondary">originAccountEmptied: <span class="fw-bold text-danger" id="derived-emptied">TRUE (1)</span></div>
-                    <div class="text-secondary">largeTransaction: <span class="fw-bold text-danger" id="derived-large">TRUE (1)</span></div>
-                  </div>
-                </div>
-
+          <!-- Customer Safety Pre-Transfer Advisory Banner -->
+          <div
+            id="safety-advisory-banner"
+            style="
+              display: none;
+              margin-bottom: 1.25rem;
+              background: rgba(239, 68, 68, 0.12);
+              border: 1px solid rgba(239, 68, 68, 0.35);
+              border-radius: var(--radius-sm);
+              padding: 0.85rem 1rem;
+            "
+          >
+            <div
+              style="
+                display: flex;
+                align-items: flex-start;
+                justify-content: space-between;
+                gap: 1rem;
+              "
+            >
+              <div style="display: flex; gap: 0.75rem">
+                <i
+                  class="bi bi-shield-exclamation text-danger"
+                  style="font-size: 1.25rem; margin-top: 2px"
+                ></i>
                 <div>
-                  <button type="button" class="aegis-btn aegis-btn-primary" id="runSimulationBtn" style="width: 100%; padding: 0.55rem;">
-                    <span class="spinner-border spinner-border-sm d-none" id="sim-spinner"></span>
-                    <i class="bi bi-play-fill"></i> Execute Multi-Engine Behavioral Evaluation
-                  </button>
+                  <div
+                    class="fw-bold text-danger font-mono"
+                    style="font-size: 0.8125rem"
+                  >
+                    CUSTOMER SAFETY WARNING
+                  </div>
+                  <div
+                    style="font-size: 0.775rem; color: #fecaca; margin-top: 2px"
+                    id="safety-advisory-text"
+                  >
+                    Warning: This recipient account has previously been linked
+                    to suspicious or fraudulent activity. Proceed with caution.
+                  </div>
                 </div>
-              </form>
+              </div>
+              <div style="display: flex; gap: 0.5rem; flex-shrink: 0">
+                <button
+                  type="button"
+                  class="aegis-btn aegis-btn-danger"
+                  id="safety-proceed-btn"
+                  style="font-size: 0.7rem; padding: 3px 10px"
+                >
+                  Confirm & Proceed
+                </button>
+                <button
+                  type="button"
+                  class="aegis-btn"
+                  id="safety-cancel-btn"
+                  style="font-size: 0.7rem; padding: 3px 10px"
+                >
+                  Cancel Transfer
+                </button>
+              </div>
             </div>
           </div>
 
-          <!-- RIGHT COLUMN: Output Summary -->
-          <div class="aegis-panel" id="sim-result-card" style="margin-bottom: 0;">
-            <div class="aegis-panel-header">
-              <h3 class="aegis-panel-title">
-                <i class="bi bi-file-earmark-medical text-accent"></i> Multi-Engine Risk Synthesis
-              </h3>
-              <span class="status-pill pill-neutral font-mono" id="sim-latency">14ms Latency</span>
+          <!-- Two Column Form & Output Grid -->
+          <div
+            class="charts-grid-2"
+            style="grid-template-columns: 1fr 1fr; align-items: start"
+          >
+            <!-- LEFT COLUMN: Input Vector -->
+            <div class="aegis-panel" style="margin-bottom: 0">
+              <div class="aegis-panel-header">
+                <h3 class="aegis-panel-title">
+                  <i class="bi bi-sliders text-accent"></i> Transaction &
+                  Behavioral Vector
+                </h3>
+                <span class="status-pill pill-neutral font-mono"
+                  >Inference Parameters</span
+                >
+              </div>
+              <div class="aegis-panel-body">
+                <form id="simulatorForm">
+                  <div
+                    style="
+                      display: grid;
+                      grid-template-columns: 1fr 1fr;
+                      gap: 0.75rem;
+                      margin-bottom: 0.75rem;
+                    "
+                  >
+                    <div>
+                      <label
+                        class="text-dim font-mono"
+                        style="
+                          font-size: 0.6875rem;
+                          display: block;
+                          margin-bottom: 0.25rem;
+                        "
+                        >ORIGIN ACCOUNT</label
+                      >
+                      <input
+                        type="text"
+                        id="sim-origAccount"
+                        class="aegis-input font-mono"
+                        value="C847291039"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <div
+                        style="
+                          display: flex;
+                          justify-content: space-between;
+                          align-items: center;
+                          margin-bottom: 0.25rem;
+                        "
+                      >
+                        <label
+                          class="text-dim font-mono"
+                          style="font-size: 0.6875rem"
+                          >RECIPIENT ACCOUNT</label
+                        >
+                        <button
+                          type="button"
+                          id="btn-pre-check-safety"
+                          class="aegis-btn"
+                          style="font-size: 0.6rem; padding: 1px 6px"
+                        >
+                          <i class="bi bi-shield-check"></i> Safety Check
+                        </button>
+                      </div>
+                      <input
+                        type="text"
+                        id="sim-destAccount"
+                        class="aegis-input font-mono"
+                        value="M928371029"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label
+                        class="text-dim font-mono"
+                        style="
+                          font-size: 0.6875rem;
+                          display: block;
+                          margin-bottom: 0.25rem;
+                        "
+                        >AMOUNT ($ USD)</label
+                      >
+                      <input
+                        type="number"
+                        id="sim-amount"
+                        class="aegis-input font-mono"
+                        value="850000"
+                        step="0.01"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label
+                        class="text-dim font-mono"
+                        style="
+                          font-size: 0.6875rem;
+                          display: block;
+                          margin-bottom: 0.25rem;
+                        "
+                        >CHANNEL TYPE</label
+                      >
+                      <select id="sim-type" class="aegis-select font-mono">
+                        <option value="4">4 - TRANSFER</option>
+                        <option value="1">1 - CASH_OUT</option>
+                        <option value="3">3 - PAYMENT</option>
+                        <option value="2">2 - DEBIT</option>
+                        <option value="0">0 - CASH_IN</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label
+                        class="text-dim font-mono"
+                        style="
+                          font-size: 0.6875rem;
+                          display: block;
+                          margin-bottom: 0.25rem;
+                        "
+                        >STEP (HOURLY UNIT)</label
+                      >
+                      <input
+                        type="number"
+                        id="sim-step"
+                        class="aegis-input font-mono"
+                        value="300"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label
+                        class="text-dim font-mono"
+                        style="
+                          font-size: 0.6875rem;
+                          display: block;
+                          margin-bottom: 0.25rem;
+                        "
+                        >TXS LAST HOUR / DAY</label
+                      >
+                      <div
+                        style="
+                          display: grid;
+                          grid-template-columns: 1fr 1fr;
+                          gap: 4px;
+                        "
+                      >
+                        <input
+                          type="number"
+                          id="sim-tx-hour"
+                          class="aegis-input font-mono"
+                          value="1"
+                          placeholder="Hour"
+                          min="1"
+                        />
+                        <input
+                          type="number"
+                          id="sim-tx-day"
+                          class="aegis-input font-mono"
+                          value="2"
+                          placeholder="Day"
+                          min="1"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <label
+                        class="text-dim font-mono"
+                        style="
+                          font-size: 0.6875rem;
+                          display: block;
+                          margin-bottom: 0.25rem;
+                        "
+                        >ORIGIN PRE-BALANCE ($)</label
+                      >
+                      <input
+                        type="number"
+                        id="sim-oldbalanceOrg"
+                        class="aegis-input font-mono"
+                        value="850000"
+                        step="0.01"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label
+                        class="text-dim font-mono"
+                        style="
+                          font-size: 0.6875rem;
+                          display: block;
+                          margin-bottom: 0.25rem;
+                        "
+                        >ORIGIN POST-BALANCE ($)</label
+                      >
+                      <input
+                        type="number"
+                        id="sim-newbalanceOrig"
+                        class="aegis-input font-mono"
+                        value="0"
+                        step="0.01"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label
+                        class="text-dim font-mono"
+                        style="
+                          font-size: 0.6875rem;
+                          display: block;
+                          margin-bottom: 0.25rem;
+                        "
+                        >DEST PRE-BALANCE ($)</label
+                      >
+                      <input
+                        type="number"
+                        id="sim-oldbalanceDest"
+                        class="aegis-input font-mono"
+                        value="0"
+                        step="0.01"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label
+                        class="text-dim font-mono"
+                        style="
+                          font-size: 0.6875rem;
+                          display: block;
+                          margin-bottom: 0.25rem;
+                        "
+                        >DEST POST-BALANCE ($)</label
+                      >
+                      <input
+                        type="number"
+                        id="sim-newbalanceDest"
+                        class="aegis-input font-mono"
+                        value="850000"
+                        step="0.01"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <!-- Structuring Batch Simulation Field -->
+                  <div style="margin-bottom: 0.75rem">
+                    <label
+                      class="text-dim font-mono"
+                      style="
+                        font-size: 0.6875rem;
+                        display: block;
+                        margin-bottom: 0.25rem;
+                      "
+                    >
+                      RECENT BATCH AMOUNTS (FOR STRUCTURING / SMURFING TEST)
+                    </label>
+                    <input
+                      type="text"
+                      id="sim-recent-amounts"
+                      class="aegis-input font-mono"
+                      value="850000"
+                      placeholder="e.g. 1000, 1200, 1500, 900, 1400"
+                    />
+                  </div>
+
+                  <!-- Auto-Derived Features Box -->
+                  <div
+                    style="
+                      background: var(--bg-app);
+                      border: 1px solid var(--border-base);
+                      border-radius: var(--radius-sm);
+                      padding: 0.75rem;
+                      margin-bottom: 1rem;
+                      font-family: var(--font-mono);
+                      font-size: 0.6875rem;
+                    "
+                  >
+                    <div
+                      class="text-dim fw-bold mb-1"
+                      style="margin-bottom: 0.35rem"
+                    >
+                      ENGINEERED ATTRIBUTES:
+                    </div>
+                    <div
+                      style="
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        gap: 0.35rem;
+                      "
+                    >
+                      <div class="text-secondary">
+                        balanceDiffOrig:
+                        <span
+                          class="fw-bold text-primary"
+                          id="derived-diff-orig"
+                          >$850,000.00</span
+                        >
+                      </div>
+                      <div class="text-secondary">
+                        balanceDiffDest:
+                        <span
+                          class="fw-bold text-primary"
+                          id="derived-diff-dest"
+                          >$850,000.00</span
+                        >
+                      </div>
+                      <div class="text-secondary">
+                        originAccountEmptied:
+                        <span class="fw-bold text-danger" id="derived-emptied"
+                          >TRUE (1)</span
+                        >
+                      </div>
+                      <div class="text-secondary">
+                        largeTransaction:
+                        <span class="fw-bold text-danger" id="derived-large"
+                          >TRUE (1)</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <button
+                      type="button"
+                      class="aegis-btn aegis-btn-primary"
+                      id="runSimulationBtn"
+                      style="width: 100%; padding: 0.55rem"
+                    >
+                      <span
+                        class="spinner-border spinner-border-sm d-none"
+                        id="sim-spinner"
+                      ></span>
+                      <i class="bi bi-play-fill"></i> Execute Multi-Engine
+                      Behavioral Evaluation
+                    </button>
+                  </div>
+                </form>
+              </div>
             </div>
-            <div class="aegis-panel-body">
-              <!-- Classification Header Block -->
-              <div style="background: var(--bg-app); border: 1px solid var(--border-base); border-radius: var(--radius-sm); padding: 0.85rem; margin-bottom: 1rem;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                  <span class="status-pill pill-critical" style="font-size: 0.75rem; padding: 0.2rem 0.6rem;" id="sim-pred-badge">
-                    <i class="bi bi-shield-slash"></i> FRAUD DETECTED
-                  </span>
-                  <span class="status-pill pill-critical font-mono" id="sim-risk-tier-badge" style="font-weight: 700;">Critical Risk (98/100)</span>
+
+            <!-- RIGHT COLUMN: Output Summary -->
+            <div
+              class="aegis-panel"
+              id="sim-result-card"
+              style="margin-bottom: 0"
+            >
+              <div class="aegis-panel-header">
+                <h3 class="aegis-panel-title">
+                  <i class="bi bi-file-earmark-medical text-accent"></i>
+                  Multi-Engine Risk Synthesis
+                </h3>
+                <span
+                  class="status-pill pill-neutral font-mono"
+                  id="sim-latency"
+                  >14ms Latency</span
+                >
+              </div>
+              <div class="aegis-panel-body">
+                <!-- Classification Header Block -->
+                <div
+                  style="
+                    background: var(--bg-app);
+                    border: 1px solid var(--border-base);
+                    border-radius: var(--radius-sm);
+                    padding: 0.85rem;
+                    margin-bottom: 1rem;
+                  "
+                >
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
+                      margin-bottom: 0.5rem;
+                    "
+                  >
+                    <span
+                      class="status-pill pill-critical"
+                      style="font-size: 0.75rem; padding: 0.2rem 0.6rem"
+                      id="sim-pred-badge"
+                    >
+                      <i class="bi bi-shield-slash"></i> FRAUD DETECTED
+                    </span>
+                    <span
+                      class="status-pill pill-critical font-mono"
+                      id="sim-risk-tier-badge"
+                      style="font-weight: 700"
+                      >Critical Risk (98/100)</span
+                    >
+                  </div>
+
+                  <!-- 5 Core Behavioral & ML Score Meters -->
+                  <div
+                    style="
+                      display: grid;
+                      grid-template-columns: repeat(5, 1fr);
+                      gap: 0.4rem;
+                      margin-top: 0.75rem;
+                      text-align: center;
+                      font-family: var(--font-mono);
+                    "
+                  >
+                    <div
+                      style="
+                        background: rgba(255, 255, 255, 0.02);
+                        border: 1px solid var(--border-subtle);
+                        border-radius: var(--radius-sm);
+                        padding: 0.4rem 0.2rem;
+                      "
+                    >
+                      <div class="text-dim" style="font-size: 0.58rem">
+                        XGBoost (70%)
+                      </div>
+                      <div
+                        class="fw-bold text-danger"
+                        style="font-size: 0.85rem"
+                        id="score-ml"
+                      >
+                        99%
+                      </div>
+                    </div>
+                    <div
+                      style="
+                        background: rgba(255, 255, 255, 0.02);
+                        border: 1px solid var(--border-subtle);
+                        border-radius: var(--radius-sm);
+                        padding: 0.4rem 0.2rem;
+                      "
+                    >
+                      <div class="text-dim" style="font-size: 0.58rem">
+                        Behavioral (20%)
+                      </div>
+                      <div
+                        class="fw-bold text-warning"
+                        style="font-size: 0.85rem"
+                        id="score-beh"
+                      >
+                        85
+                      </div>
+                    </div>
+                    <div
+                      style="
+                        background: rgba(255, 255, 255, 0.02);
+                        border: 1px solid var(--border-subtle);
+                        border-radius: var(--radius-sm);
+                        padding: 0.4rem 0.2rem;
+                      "
+                    >
+                      <div class="text-dim" style="font-size: 0.58rem">
+                        Velocity
+                      </div>
+                      <div
+                        class="fw-bold text-accent"
+                        style="font-size: 0.85rem"
+                        id="score-vel"
+                      >
+                        88
+                      </div>
+                    </div>
+                    <div
+                      style="
+                        background: rgba(255, 255, 255, 0.02);
+                        border: 1px solid var(--border-subtle);
+                        border-radius: var(--radius-sm);
+                        padding: 0.4rem 0.2rem;
+                      "
+                    >
+                      <div class="text-dim" style="font-size: 0.58rem">
+                        Structuring
+                      </div>
+                      <div
+                        class="fw-bold text-primary"
+                        style="font-size: 0.85rem"
+                        id="score-struct"
+                      >
+                        65
+                      </div>
+                    </div>
+                    <div
+                      style="
+                        background: rgba(255, 255, 255, 0.02);
+                        border: 1px solid var(--border-subtle);
+                        border-radius: var(--radius-sm);
+                        padding: 0.4rem 0.2rem;
+                      "
+                    >
+                      <div class="text-dim" style="font-size: 0.58rem">
+                        Recipient Risk
+                      </div>
+                      <div
+                        class="fw-bold text-danger"
+                        style="font-size: 0.85rem"
+                        id="score-rep"
+                      >
+                        90
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    style="
+                      display: grid;
+                      grid-template-columns: 1fr 1fr;
+                      gap: 0.75rem;
+                      margin-top: 0.75rem;
+                      font-family: var(--font-mono);
+                    "
+                  >
+                    <div
+                      style="
+                        border-right: 1px solid var(--border-base);
+                        padding-right: 0.5rem;
+                      "
+                    >
+                      <div class="text-dim" style="font-size: 0.6875rem">
+                        Final Risk Score (70/20/10 Fusion)
+                      </div>
+                      <div
+                        class="text-danger font-mono fw-bold"
+                        style="font-size: 1.25rem"
+                        id="sim-prob-val"
+                      >
+                        98.2 / 100
+                      </div>
+                    </div>
+                    <div style="padding-left: 0.5rem">
+                      <div class="text-dim" style="font-size: 0.6875rem">
+                        Calculated Exposure
+                      </div>
+                      <div
+                        class="text-danger font-mono fw-bold"
+                        style="font-size: 1.25rem"
+                        id="sim-loss-val"
+                      >
+                        $845,070.00
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
-                <!-- 5 Core Behavioral & ML Score Meters -->
-                <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.4rem; margin-top: 0.75rem; text-align: center; font-family: var(--font-mono);">
-                  <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 0.4rem 0.2rem;">
-                    <div class="text-dim" style="font-size: 0.58rem;">XGBoost (70%)</div>
-                    <div class="fw-bold text-danger" style="font-size: 0.85rem;" id="score-ml">99%</div>
+                <!-- Primary SHAP Influencing Drivers -->
+                <div style="margin-bottom: 1rem">
+                  <div
+                    class="text-dim font-mono fw-semibold"
+                    style="font-size: 0.6875rem; margin-bottom: 0.35rem"
+                  >
+                    TOP INFLUENCING ATTRIBUTIONS:
                   </div>
-                  <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 0.4rem 0.2rem;">
-                    <div class="text-dim" style="font-size: 0.58rem;">Behavioral (20%)</div>
-                    <div class="fw-bold text-warning" style="font-size: 0.85rem;" id="score-beh">85</div>
-                  </div>
-                  <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 0.4rem 0.2rem;">
-                    <div class="text-dim" style="font-size: 0.58rem;">Velocity</div>
-                    <div class="fw-bold text-accent" style="font-size: 0.85rem;" id="score-vel">88</div>
-                  </div>
-                  <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 0.4rem 0.2rem;">
-                    <div class="text-dim" style="font-size: 0.58rem;">Structuring</div>
-                    <div class="fw-bold text-primary" style="font-size: 0.85rem;" id="score-struct">65</div>
-                  </div>
-                  <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 0.4rem 0.2rem;">
-                    <div class="text-dim" style="font-size: 0.58rem;">Recipient Risk</div>
-                    <div class="fw-bold text-danger" style="font-size: 0.85rem;" id="score-rep">90</div>
+                  <div
+                    id="sim-reasons-list"
+                    style="display: flex; flex-direction: column; gap: 0.35rem"
+                  >
+                    <!-- Populated dynamically -->
                   </div>
                 </div>
 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 0.75rem; font-family: var(--font-mono);">
-                  <div style="border-right: 1px solid var(--border-base); padding-right: 0.5rem;">
-                    <div class="text-dim" style="font-size: 0.6875rem;">Final Risk Score (70/20/10 Fusion)</div>
-                    <div class="text-danger font-mono fw-bold" style="font-size: 1.25rem;" id="sim-prob-val">98.2 / 100</div>
+                <!-- Decision Recommendation Box -->
+                <div
+                  id="sim-recommendation-box"
+                  style="
+                    background: var(--status-critical-bg);
+                    border: 1px solid var(--status-critical-border);
+                    border-radius: var(--radius-sm);
+                    padding: 0.85rem;
+                    margin-bottom: 1rem;
+                  "
+                >
+                  <div
+                    style="
+                      display: flex;
+                      align-items: center;
+                      gap: 0.4rem;
+                      margin-bottom: 0.25rem;
+                    "
+                  >
+                    <i
+                      class="bi bi-exclamation-octagon-fill text-danger fs-6"
+                      id="sim-rec-icon"
+                    ></i>
+                    <span
+                      class="fw-bold font-mono text-danger"
+                      style="font-size: 0.75rem"
+                      id="sim-rec-title"
+                      >CRITICAL ACTION REQUIRED</span
+                    >
                   </div>
-                  <div style="padding-left: 0.5rem;">
-                    <div class="text-dim" style="font-size: 0.6875rem;">Calculated Exposure</div>
-                    <div class="text-danger font-mono fw-bold" style="font-size: 1.25rem;" id="sim-loss-val">$845,070.00</div>
+                  <div
+                    style="
+                      font-size: 0.75rem;
+                      line-height: 1.4;
+                      color: var(--text-primary);
+                    "
+                    id="sim-rec-text"
+                  >
+                    Immediate Intervention Required. Freeze origin account and
+                    halt settlement dispatch to prevent permanent wire loss.
+                    Escalate case to Senior Financial Crime Unit.
+                  </div>
+                </div>
+
+                <!-- Natural Language Analyst Summary -->
+                <div
+                  style="
+                    background: var(--bg-app);
+                    border: 1px solid var(--border-base);
+                    border-radius: var(--radius-sm);
+                    padding: 0.75rem;
+                  "
+                >
+                  <div
+                    class="text-dim font-mono fw-semibold"
+                    style="font-size: 0.6875rem; margin-bottom: 0.25rem"
+                  >
+                    ANALYST CASE NARRATIVE:
+                  </div>
+                  <div
+                    class="font-mono text-secondary"
+                    style="font-size: 0.75rem; line-height: 1.4"
+                    id="sim-narrative-text"
+                  >
+                    The XGBoost model flagged significant high-risk anomaly
+                    patterns. The sender account was completely emptied from a
+                    pre-balance of $850,000.00 to $0.00 via high-volume
+                    transfer. TreeSHAP indicates balance delta and zeroing flags
+                    as primary risk drivers.
                   </div>
                 </div>
               </div>
-
-              <!-- Primary SHAP Influencing Drivers -->
-              <div style="margin-bottom: 1rem;">
-                <div class="text-dim font-mono fw-semibold" style="font-size: 0.6875rem; margin-bottom: 0.35rem;">
-                  TOP INFLUENCING ATTRIBUTIONS:
-                </div>
-                <div id="sim-reasons-list" style="display: flex; flex-direction: column; gap: 0.35rem;">
-                  <!-- Populated dynamically -->
-                </div>
-              </div>
-
-              <!-- Decision Recommendation Box -->
-              <div id="sim-recommendation-box" style="background: var(--status-critical-bg); border: 1px solid var(--status-critical-border); border-radius: var(--radius-sm); padding: 0.85rem; margin-bottom: 1rem;">
-                <div style="display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.25rem;">
-                  <i class="bi bi-exclamation-octagon-fill text-danger fs-6" id="sim-rec-icon"></i>
-                  <span class="fw-bold font-mono text-danger" style="font-size: 0.75rem;" id="sim-rec-title">CRITICAL ACTION REQUIRED</span>
-                </div>
-                <div style="font-size: 0.75rem; line-height: 1.4; color: var(--text-primary);" id="sim-rec-text">
-                  Immediate Intervention Required. Freeze origin account and halt settlement dispatch to prevent permanent wire loss. Escalate case to Senior Financial Crime Unit.
-                </div>
-              </div>
-
-              <!-- Natural Language Analyst Summary -->
-              <div style="background: var(--bg-app); border: 1px solid var(--border-base); border-radius: var(--radius-sm); padding: 0.75rem;">
-                <div class="text-dim font-mono fw-semibold" style="font-size: 0.6875rem; margin-bottom: 0.25rem;">ANALYST CASE NARRATIVE:</div>
-                <div class="font-mono text-secondary" style="font-size: 0.75rem; line-height: 1.4;" id="sim-narrative-text">
-                  The XGBoost model flagged significant high-risk anomaly patterns. The sender account was completely emptied from a pre-balance of $850,000.00 to $0.00 via high-volume transfer. TreeSHAP indicates balance delta and zeroing flags as primary risk drivers.
-                </div>
-              </div>
-
             </div>
           </div>
-
         </div>
+      </main>
+    </div>
 
-      </div>
-    </main>
-  </div>
+    <div id="toast-container" class="toast-container-custom"></div>
 
-  <div id="toast-container" class="toast-container-custom"></div>
-
-  <script src="js/config.js"></script>
-  <script src="js/toast.js"></script>
-  <script src="js/theme.js"></script>
-  <script src="js/api.js"></script>
-  <script src="js/simulator.js"></script>
-</body>
+    <script src="js/config.js"></script>
+    <script src="js/toast.js"></script>
+    <script src="js/theme.js?v=20260925-2"></script>
+    <script src="js/api.js"></script>
+    <script src="js/simulator.js"></script>
+  </body>
 </html>

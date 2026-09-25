@@ -4,24 +4,32 @@
  */
 const ChartService = {
   getThemeColors() {
+    const lightMode =
+      document.documentElement.getAttribute("data-theme") === "light";
     return {
-      text: "#A1A1AA",
-      heading: "#FAFAFA",
-      grid: "rgba(255, 255, 255, 0.06)",
-      border: "rgba(255, 255, 255, 0.08)",
-      tooltipBg: "#14141C",
-      tooltipBorder: "rgba(255, 255, 255, 0.08)",
-      tooltipText: "#FAFAFA",
-      accent: "#8B5CF6",
-      accentHover: "#A78BFA",
-      accentBg: "rgba(139, 92, 246, 0.18)",
+      text: lightMode ? "#52525B" : "#A1A1AA",
+      heading: lightMode ? "#18181B" : "#FAFAFA",
+      grid: lightMode ? "rgba(24, 24, 27, 0.10)" : "rgba(255, 255, 255, 0.06)",
+      border: lightMode
+        ? "rgba(24, 24, 27, 0.14)"
+        : "rgba(255, 255, 255, 0.08)",
+      tooltipBg: lightMode ? "#FFFFFF" : "#14141C",
+      tooltipBorder: lightMode
+        ? "rgba(24, 24, 27, 0.14)"
+        : "rgba(255, 255, 255, 0.08)",
+      tooltipText: lightMode ? "#18181B" : "#FAFAFA",
+      accent: lightMode ? "#6D28D9" : "#8B5CF6",
+      accentHover: lightMode ? "#5B21B6" : "#A78BFA",
+      accentBg: lightMode
+        ? "rgba(109, 40, 217, 0.14)"
+        : "rgba(139, 92, 246, 0.18)",
       danger: "#EF4444",
       dangerBg: "rgba(239, 68, 68, 0.18)",
       warning: "#F59E0B",
       warningBg: "rgba(245, 158, 11, 0.18)",
-      success: "#22C55E",
-      successBg: "rgba(34, 197, 94, 0.18)",
-      info: "#3B82F6",
+      success: "#16A34A",
+      successBg: "rgba(22, 163, 74, 0.16)",
+      info: "#2563EB",
     };
   },
 
@@ -30,6 +38,7 @@ const ChartService = {
    */
   prepareCanvas(canvasId) {
     const ctx = document.getElementById(canvasId);
+    console.log("Container:", ctx);
     if (!ctx) return null;
     if (typeof Chart !== "undefined") {
       const existingChart = Chart.getChart(ctx);
@@ -40,12 +49,22 @@ const ChartService = {
     return ctx;
   },
 
+  logChartData(name, data) {
+    console.log("Chart Data:", name, data);
+  },
+
+  logChartInitialized(name) {
+    console.log("Chart Initialized:", name);
+  },
+
   /**
    * Monthly Anomaly Volume & Value Exposure (Smooth Line Chart with Dual Axis)
    */
   createMonthlyAnomalyTrendChart(canvasId, data) {
     const ctx = this.prepareCanvas(canvasId);
     if (!ctx || typeof Chart === "undefined") return null;
+
+    this.logChartData("Monthly Anomaly Trend", data);
 
     const colors = this.getThemeColors();
 
@@ -85,7 +104,7 @@ const ChartService = {
           ? data.expected_loss_k
           : [310, 440, 520, 680, 810, 890, 760, 950, 1120, 1250, 1080, 1340];
 
-    return new Chart(ctx, {
+    const chart = new Chart(ctx, {
       type: "line",
       data: {
         labels: labels,
@@ -190,6 +209,8 @@ const ChartService = {
         },
       },
     });
+    this.logChartInitialized("Monthly Anomaly Trend");
+    return chart;
   },
 
   /**
@@ -325,6 +346,8 @@ const ChartService = {
     const ctx = this.prepareCanvas(canvasId);
     if (!ctx || typeof Chart === "undefined") return null;
 
+    this.logChartData("Channel Distribution", data);
+
     const colors = this.getThemeColors();
 
     const labels =
@@ -337,7 +360,7 @@ const ChartService = {
         ? data.counts
         : [1140, 620, 58, 16, 8];
 
-    return new Chart(ctx, {
+    const chart = new Chart(ctx, {
       type: "doughnut",
       data: {
         labels: labels,
@@ -395,6 +418,8 @@ const ChartService = {
         },
       },
     });
+    this.logChartInitialized("Channel Distribution");
+    return chart;
   },
 
   /**
@@ -403,6 +428,8 @@ const ChartService = {
   createGlobalShapRankingChart(canvasId, features) {
     const ctx = this.prepareCanvas(canvasId);
     if (!ctx || typeof Chart === "undefined") return null;
+
+    this.logChartData("Global SHAP Importance", features);
 
     const colors = this.getThemeColors();
 
@@ -450,7 +477,7 @@ const ChartService = {
           : 0,
     );
 
-    return new Chart(ctx, {
+    const chart = new Chart(ctx, {
       type: "bar",
       data: {
         labels: labels,
@@ -506,6 +533,8 @@ const ChartService = {
         },
       },
     });
+    this.logChartInitialized("Global SHAP Importance");
+    return chart;
   },
 
   /**
@@ -616,54 +645,29 @@ const ChartService = {
     const ctx = this.prepareCanvas(canvasId);
     if (!ctx || typeof Chart === "undefined") return null;
 
+    this.logChartData("Behavioral vs Transaction Fraud", data);
+
     const colors = this.getThemeColors();
     const labels =
       data && Array.isArray(data.labels) && data.labels.length
         ? data.labels
-        : [
-            "Velocity Fraud",
-            "Structuring",
-            "Recipient Risk",
-            "Traditional Single-Tx",
-          ];
+        : ["Transaction Fraud", "Behavioral Fraud", "Hybrid Cases"];
 
     const counts =
       data && Array.isArray(data.counts) && data.counts.length
         ? data.counts
-        : [142, 98, 76, 210];
+        : [412, 1430, 240];
 
-    const amounts =
-      data && Array.isArray(data.amounts) && data.amounts.length
-        ? data.amounts.map((a) => Math.round(a / 1000))
-        : [1850, 940, 1280, 3120];
-
-    return new Chart(ctx, {
+    const chart = new Chart(ctx, {
       type: "bar",
       data: {
         labels: labels,
         datasets: [
           {
-            label: "Incident Volume",
+            label: "Fraud Cases",
             data: counts,
-            backgroundColor: [
-              colors.warning,
-              colors.accent,
-              colors.danger,
-              colors.info,
-            ],
+            backgroundColor: [colors.danger, colors.accent, colors.warning],
             borderRadius: 4,
-            yAxisID: "y",
-          },
-          {
-            label: "Exposure ($k)",
-            data: amounts,
-            type: "line",
-            borderColor: colors.danger,
-            backgroundColor: "transparent",
-            borderWidth: 2,
-            pointRadius: 4,
-            pointBackgroundColor: colors.danger,
-            yAxisID: "y1",
           },
         ],
       },
@@ -701,27 +705,17 @@ const ChartService = {
             },
           },
           y: {
-            type: "linear",
-            position: "left",
             grid: { color: colors.grid, drawBorder: false },
             ticks: {
               color: colors.text,
               font: { family: "JetBrains Mono", size: 9 },
             },
           },
-          y1: {
-            type: "linear",
-            position: "right",
-            grid: { drawOnChartArea: false },
-            ticks: {
-              color: colors.danger,
-              font: { family: "JetBrains Mono", size: 9 },
-              callback: (v) => "$" + v + "k",
-            },
-          },
         },
       },
     });
+    this.logChartInitialized("Behavioral vs Transaction Fraud");
+    return chart;
   },
 
   /**
@@ -730,6 +724,8 @@ const ChartService = {
   createVelocityDistributionChart(canvasId, data) {
     const ctx = this.prepareCanvas(canvasId);
     if (!ctx || typeof Chart === "undefined") return null;
+
+    this.logChartData("Velocity Risk Distribution", data);
 
     const colors = this.getThemeColors();
     const labels =
@@ -748,7 +744,7 @@ const ChartService = {
         ? data.counts
         : [6820, 1420, 380, 142, 48];
 
-    return new Chart(ctx, {
+    const chart = new Chart(ctx, {
       type: "bar",
       data: {
         labels: labels,
@@ -803,43 +799,157 @@ const ChartService = {
         },
       },
     });
+    this.logChartInitialized("Velocity Risk Distribution");
+    return chart;
   },
 
   /**
-   * Structuring Detection Statistics (Donut Chart)
+   * Structuring Detection Statistics (Trend Line Chart)
    */
   createStructuringStatsChart(canvasId, data) {
     const ctx = this.prepareCanvas(canvasId);
     if (!ctx || typeof Chart === "undefined") return null;
+
+    this.logChartData("Structuring Statistics", data);
+
+    const colors = this.getThemeColors();
+    const labels =
+      data && Array.isArray(data.labels) && data.labels.length
+        ? data.labels
+        : ["Jan", "Feb", "Mar", "Apr", "May"];
+    const structuringCases =
+      data && Array.isArray(data.structuring_cases)
+        ? data.structuring_cases
+        : data && Array.isArray(data.counts) && data.counts.length
+          ? data.counts
+          : [25, 42, 68, 97, 113];
+    const smurfingCases =
+      data && Array.isArray(data.smurfing_cases)
+        ? data.smurfing_cases
+        : structuringCases.map((value, index) =>
+            Math.max(
+              1,
+              Math.round(value * [0.72, 0.83, 0.79, 0.88, 0.9][index % 5]),
+            ),
+          );
+
+    const chart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: "Structuring Cases",
+            data: structuringCases,
+            borderColor: colors.accent,
+            backgroundColor: colors.accentBg,
+            fill: true,
+            tension: 0.35,
+            pointRadius: 3,
+            pointHoverRadius: 6,
+          },
+          {
+            label: "Smurfing Activity",
+            data: smurfingCases,
+            borderColor: colors.warning,
+            backgroundColor: "transparent",
+            borderDash: [5, 4],
+            tension: 0.35,
+            pointRadius: 3,
+            pointHoverRadius: 6,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: "index", intersect: false },
+        plugins: {
+          legend: {
+            position: "top",
+            align: "end",
+            labels: {
+              boxWidth: 8,
+              padding: 8,
+              color: colors.text,
+              font: { family: "JetBrains Mono", size: 9, weight: 600 },
+            },
+          },
+          tooltip: {
+            backgroundColor: colors.tooltipBg,
+            borderColor: colors.tooltipBorder,
+            borderWidth: 1,
+            titleColor: colors.heading,
+            bodyColor: colors.text,
+            titleFont: { family: "JetBrains Mono", size: 10, weight: 600 },
+            bodyFont: { family: "JetBrains Mono", size: 9 },
+            padding: 8,
+            cornerRadius: 8,
+          },
+        },
+        scales: {
+          x: {
+            grid: { color: colors.grid, drawBorder: false },
+            ticks: {
+              color: colors.text,
+              font: { family: "JetBrains Mono", size: 9 },
+            },
+          },
+          y: {
+            beginAtZero: true,
+            grid: { color: colors.grid, drawBorder: false },
+            ticks: {
+              color: colors.text,
+              font: { family: "JetBrains Mono", size: 9 },
+            },
+          },
+        },
+      },
+    });
+    this.logChartInitialized("Structuring Statistics");
+    return chart;
+  },
+
+  /**
+   * Recipient Risk Distribution (Horizontal Bar Chart)
+   */
+  createRecipientRiskDistChart(canvasId, data) {
+    const ctx = this.prepareCanvas(canvasId);
+    if (!ctx || typeof Chart === "undefined") return null;
+
+    this.logChartData("Recipient Risk Distribution", data);
 
     const colors = this.getThemeColors();
     const labels =
       data && Array.isArray(data.labels) && data.labels.length
         ? data.labels
         : [
-            "Sub-Threshold Splits",
-            "Rapid Multi-Hop",
-            "Cyclic Smurfing",
-            "Account Consolidation",
+            "Clean (0-20)",
+            "Low (21-40)",
+            "Watchlist (41-60)",
+            "Escalated (61-80)",
+            "Confirmed Mule (81-100)",
           ];
 
     const counts =
       data && Array.isArray(data.counts) && data.counts.length
         ? data.counts
-        : [156, 84, 42, 65];
+        : [8940, 1200, 310, 89, 45];
 
-    return new Chart(ctx, {
+    const chart = new Chart(ctx, {
       type: "doughnut",
       data: {
         labels: labels,
         datasets: [
           {
+            label: "Beneficiary Accounts",
             data: counts,
             backgroundColor: [
-              colors.danger,
-              colors.warning,
-              colors.accent,
+              colors.success,
               colors.info,
+              colors.accent,
+              colors.warning,
+              colors.danger,
             ],
             borderWidth: 2,
             borderColor: "#14141C",
@@ -850,7 +960,7 @@ const ChartService = {
       options: {
         responsive: true,
         maintainAspectRatio: false,
-        cutout: "70%",
+        cutout: "68%",
         plugins: {
           legend: {
             position: "bottom",
@@ -876,88 +986,8 @@ const ChartService = {
         },
       },
     });
-  },
-
-  /**
-   * Recipient Risk Distribution (Horizontal Bar Chart)
-   */
-  createRecipientRiskDistChart(canvasId, data) {
-    const ctx = this.prepareCanvas(canvasId);
-    if (!ctx || typeof Chart === "undefined") return null;
-
-    const colors = this.getThemeColors();
-    const labels =
-      data && Array.isArray(data.labels) && data.labels.length
-        ? data.labels
-        : [
-            "Clean (0-20)",
-            "Low (21-40)",
-            "Watchlist (41-60)",
-            "Escalated (61-80)",
-            "Confirmed Mule (81-100)",
-          ];
-
-    const counts =
-      data && Array.isArray(data.counts) && data.counts.length
-        ? data.counts
-        : [8940, 1200, 310, 89, 45];
-
-    return new Chart(ctx, {
-      type: "bar",
-      data: {
-        labels: labels,
-        datasets: [
-          {
-            label: "Beneficiary Accounts",
-            data: counts,
-            backgroundColor: [
-              colors.success,
-              colors.info,
-              colors.accent,
-              colors.warning,
-              colors.danger,
-            ],
-            borderRadius: 4,
-            maxBarThickness: 16,
-          },
-        ],
-      },
-      options: {
-        indexAxis: "y",
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: { display: false },
-          tooltip: {
-            backgroundColor: colors.tooltipBg,
-            borderColor: colors.tooltipBorder,
-            borderWidth: 1,
-            titleColor: colors.heading,
-            bodyColor: colors.text,
-            titleFont: { family: "JetBrains Mono", size: 10, weight: 600 },
-            bodyFont: { family: "JetBrains Mono", size: 9 },
-            padding: 8,
-            cornerRadius: 8,
-          },
-        },
-        scales: {
-          x: {
-            grid: { color: colors.grid, drawBorder: false },
-            ticks: {
-              color: colors.text,
-              font: { family: "JetBrains Mono", size: 8 },
-            },
-          },
-          y: {
-            grid: { display: false },
-            ticks: {
-              color: colors.heading,
-              font: { family: "JetBrains Mono", size: 8, weight: 500 },
-            },
-          },
-        },
-      },
-    });
+    this.logChartInitialized("Recipient Risk Distribution");
+    return chart;
   },
 
   /**
