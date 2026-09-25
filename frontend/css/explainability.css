@@ -1,0 +1,185 @@
+/* ==========================================================================
+   EXPLAINABILITY & INVESTIGATION STYLES - REACTBITS DARK THEME
+   Exact Color Variables
+   ========================================================================== */
+
+/* Settlement Ledger Flow (Sender -> Receiver) */
+.settlement-ledger {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 0.75rem;
+  align-items: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--card-radius);
+  padding: 0.875rem;
+  margin-bottom: 0.875rem;
+}
+
+.ledger-account-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  background: var(--bg-panel);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 0.625rem 0.75rem;
+}
+
+.ledger-account-header {
+  font-size: 0.625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.ledger-account-id {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.8125rem;
+  color: var(--text-primary);
+}
+
+.ledger-delta-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.6875rem;
+  font-family: var(--font-mono);
+  padding: 0.15rem 0;
+  color: var(--text-secondary);
+}
+
+.ledger-delta-row.highlight {
+  font-weight: 700;
+  border-top: 1px dashed var(--divider-color);
+  margin-top: 0.35rem;
+  padding-top: 0.35rem;
+}
+
+.ledger-arrow {
+  color: var(--text-muted);
+  font-size: 1.125rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* TreeSHAP Factor Cards */
+.shap-factor-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-sm);
+  margin-bottom: 0.4rem;
+  background: var(--bg-card);
+  transition: all 0.12s ease;
+}
+
+.shap-factor-row:hover {
+  background: #171720;
+  border-color: var(--border-hover);
+}
+
+.shap-factor-row.risk-high {
+  border-left: 3px solid var(--status-danger);
+}
+
+.shap-factor-row.risk-med {
+  border-left: 3px solid var(--status-warning);
+}
+
+.shap-factor-row.risk-low {
+  border-left: 3px solid var(--status-success);
+}
+
+.shap-factor-main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  flex: 1;
+}
+
+.shap-factor-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+}
+
+.shap-factor-desc {
+  font-size: 0.6875rem;
+  color: var(--text-secondary);
+}
+
+.shap-factor-val {
+  text-align: right;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.8125rem;
+}
+
+.shap-factor-val.positive {
+  color: var(--status-danger);
+}
+
+.shap-factor-val.negative {
+  color: var(--status-success);
+}
+
+/* Radial Gauge */
+.gauge-metric-container {
+  display: flex;
+  align-items: center;
+  gap: 1.125rem;
+  padding: 0.875rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--card-radius);
+  margin-bottom: 0.75rem;
+}
+
+.gauge-circle-box {
+  width: 68px;
+  height: 68px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.gauge-svg {
+  transform: rotate(-90deg);
+  width: 100%;
+  height: 100%;
+}
+
+.gauge-bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.08);
+  stroke-width: 5;
+}
+
+.gauge-bar {
+  fill: none;
+  stroke: var(--status-danger);
+  stroke-width: 5;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gauge-text-val {
+  position: absolute;
+  font-family: var(--font-mono);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}

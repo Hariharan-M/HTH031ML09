@@ -1,0 +1,171 @@
+/* ==========================================================================
+   REACT BITS / LINEAR - LINE SIDEBAR COMPONENT
+   Single Dark Theme for Aegis Risk Intelligence Platform
+   Exact Palette Specification
+   ========================================================================== */
+
+.line-sidebar {
+  --accent-color: #8B5CF6;
+  --text-color: #A1A1AA;
+  --marker-color: rgba(255, 255, 255, 0.15);
+  --marker-length: 24px;
+  --marker-gap: 8px;
+  --tick-scale: 0.5;
+  --max-shift: 12px;
+  --item-gap: 8px;
+  --font-size: 0.8125rem;
+  --smoothing: 100ms;
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.line-sidebar--markers {
+  padding-left: calc(var(--marker-length) + var(--marker-gap) + 8px);
+  padding-right: 8px;
+}
+
+.line-sidebar__list {
+  list-style: none;
+  margin: 0;
+  padding: 0.25rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--item-gap);
+  position: relative;
+}
+
+.line-sidebar__item {
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+  border-radius: var(--radius-sm);
+  transition: background-color 0.12s ease;
+}
+
+.line-sidebar__item:hover {
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+.line-sidebar__item[aria-current="true"] {
+  background-color: rgba(139, 92, 246, 0.12);
+  border: 1px solid rgba(139, 92, 246, 0.25);
+}
+
+/* Pointer hit-box expander */
+.line-sidebar__item::before {
+  content: '';
+  position: absolute;
+  inset: -3px -12px;
+  z-index: 1;
+}
+
+.line-sidebar__link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-decoration: none;
+  width: 100%;
+  color: inherit;
+  position: relative;
+  z-index: 2;
+  padding: 0.45rem 0.55rem;
+}
+
+.line-sidebar__label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  font-size: var(--font-size);
+  font-weight: 500;
+  line-height: 1.2;
+  color: color-mix(in srgb, var(--accent-color) calc(var(--effect, 0) * 100%), var(--text-color));
+  transform: translateX(calc(var(--effect, 0) * var(--max-shift)));
+  transition: none;
+}
+
+.line-sidebar__index {
+  font-family: var(--font-mono, monospace);
+  margin-right: 0.5rem;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  opacity: calc(0.4 + var(--effect, 0) * 0.6);
+  color: var(--text-disabled);
+}
+
+.line-sidebar__icon {
+  margin-right: 0.5rem;
+  font-size: 0.875rem;
+  opacity: calc(0.7 + var(--effect, 0) * 0.3);
+  display: inline-flex;
+  align-items: center;
+}
+
+.line-sidebar__text {
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.line-sidebar__badge {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.625rem;
+  font-weight: 700;
+  background-color: var(--status-danger-bg);
+  color: var(--status-danger);
+  border: 1px solid var(--status-danger-border);
+  padding: 0.08rem 0.4rem;
+  border-radius: 9999px;
+  line-height: 1.2;
+  opacity: calc(0.8 + var(--effect, 0) * 0.2);
+  transform: translateX(calc(var(--effect, 0) * (var(--max-shift) / 2)));
+}
+
+.line-sidebar__marker {
+  position: absolute;
+  top: 50%;
+  left: calc(-1 * var(--marker-length) - var(--marker-gap));
+  height: 2px;
+  width: var(--marker-length);
+  background-color: color-mix(in srgb, var(--accent-color) calc(var(--effect, 0) * 100%), var(--marker-color));
+  transform-origin: left center;
+  transform: translateY(-50%) scaleX(calc(0.6 + var(--effect, 0) * 0.6));
+  border-radius: 1px;
+  pointer-events: none;
+}
+
+/* Static Tick */
+.line-sidebar--markers .line-sidebar__item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: calc(100% + var(--item-gap) / 2);
+  left: calc(-1 * var(--marker-length) - var(--marker-gap));
+  height: 1px;
+  width: calc(var(--marker-length) * var(--tick-scale));
+  background-color: var(--marker-color);
+  opacity: 0.3;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* Dynamic Hover Scaling Tick */
+.line-sidebar--scale-tick .line-sidebar__item:not(:last-child)::after {
+  transform-origin: left center;
+  transform: translateY(-50%) scaleX(calc(0.6 + var(--effect, 0) * 0.6));
+}
+
+.line-sidebar__item[aria-current="true"] .line-sidebar__label {
+  font-weight: 600;
+  color: #FAFAFA;
+}
+
+.line-sidebar__item[aria-current="true"] .line-sidebar__icon {
+  color: var(--accent-color);
+}
+
+.line-sidebar__item[aria-current="true"] .line-sidebar__marker {
+  background-color: var(--accent-color);
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.6);
+}

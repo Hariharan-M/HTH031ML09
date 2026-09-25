@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fraud Triage Queue | Aegis Risk Intelligence</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+  <div class="aegis-app">
+    <!-- Minimalist Linear / Arc Sidebar -->
+    <aside class="aegis-sidebar">
+      <a href="index.html" class="sidebar-brand">
+        <div class="sidebar-brand-icon">AG</div>
+        <div class="sidebar-brand-title">
+          AEGIS <span class="sidebar-brand-badge">FCU</span>
+        </div>
+      </a>
+
+      <div class="sidebar-nav">
+        <div>
+          <div class="sidebar-section-title">Command Center</div>
+          <ul class="sidebar-menu">
+            <li>
+              <a href="index.html" class="sidebar-link">
+                <div class="sidebar-link-inner">
+                  <i class="bi bi-grid-1x2"></i>
+                  <span>Overview</span>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="queue.html" class="sidebar-link active">
+                <div class="sidebar-link-inner">
+                  <i class="bi bi-shield-exclamation"></i>
+                  <span>Fraud Queue</span>
+                </div>
+                <span class="sidebar-count-pill" id="sidebar-queue-badge">8</span>
+              </a>
+            </li>
+            <li>
+              <a href="transaction-detail.html?id=TX-948271" class="sidebar-link">
+                <div class="sidebar-link-inner">
+                  <i class="bi bi-search"></i>
+                  <span>Investigator</span>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="analytics.html" class="sidebar-link">
+                <div class="sidebar-link-inner">
+                  <i class="bi bi-bar-chart-line"></i>
+                  <span>Model Intelligence</span>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="simulator.html" class="sidebar-link">
+                <div class="sidebar-link-inner">
+                  <i class="bi bi-terminal"></i>
+                  <span>Inference Lab</span>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="settings.html" class="sidebar-link">
+                <div class="sidebar-link-inner">
+                  <i class="bi bi-sliders2"></i>
+                  <span>Risk Policies</span>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-status-indicator">
+          <span class="status-dot-active"></span>
+          <span>XGBOOST 2.4 / SHAP</span>
+        </div>
+        <div class="text-dim">SQLite Store Online</div>
+      </div>
+    </aside>
+
+    <!-- Main Workspace Viewport -->
+    <main class="aegis-main">
+      <header class="aegis-topbar">
+        <div class="topbar-breadcrumbs">
+          <a href="index.html">Aegis</a>
+          <span>/</span>
+          <span class="current-page">Fraud Triage Queue</span>
+        </div>
+
+        <div class="topbar-actions">
+          <div class="engine-status-chip backend-status-pill">
+            <span class="status-dot-active"></span>
+            <span>FastAPI: ONLINE</span>
+          </div>
+
+          <div class="analyst-profile-chip">
+            <span class="label">ANALYST:</span>
+            <span class="name">Sarah Lin (Lead)</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="aegis-viewport">
+        <!-- Page Hero -->
+        <div class="page-hero">
+          <div>
+            <h1 class="page-title">
+              <i class="bi bi-shield-lock text-accent"></i> Fraud Triage Workstation
+            </h1>
+            <p class="page-subtitle">Linear-style work-item triage: review anomalous flows, freeze compromised origin accounts, or approve legitimate transactions.</p>
+          </div>
+          <div class="page-hero-actions">
+            <button class="aegis-btn" id="exportCsvBtn">
+              <i class="bi bi-download"></i> Export CSV
+            </button>
+            <button class="aegis-btn" id="refreshQueueBtn">
+              <i class="bi bi-arrow-repeat"></i> Sync SQLite
+            </button>
+          </div>
+        </div>
+
+        <!-- Linear Issues Container -->
+        <div class="issue-container">
+          <!-- Linear Filter Strip -->
+          <div class="issue-filter-strip">
+            <div class="issue-filter-left">
+              <div class="issue-search-box">
+                <i class="bi bi-search"></i>
+                <input type="text" id="queueSearchInput" class="issue-search-input font-mono" placeholder="Filter cases by ID, account, reason... (⌘K)">
+              </div>
+
+              <select id="categoryFilter" class="aegis-select font-mono" style="width: auto; min-width: 155px;">
+                <option value="ALL">All Categories</option>
+                <option value="VELOCITY">⚡ Velocity Fraud</option>
+                <option value="STRUCTURING">🧱 Structuring</option>
+                <option value="RECIPIENT_RISK">🎯 Recipient Risk</option>
+                <option value="TRADITIONAL">🛡️ Traditional Fraud</option>
+              </select>
+
+              <select id="riskLevelFilter" class="aegis-select font-mono" style="width: auto; min-width: 130px;">
+                <option value="ALL">All Risk Tiers</option>
+                <option value="CRITICAL">Critical (>85%)</option>
+                <option value="HIGH">High (70-85%)</option>
+                <option value="MEDIUM">Medium (40-70%)</option>
+                <option value="LOW">Low (&lt;40%)</option>
+              </select>
+
+              <select id="txTypeFilter" class="aegis-select font-mono" style="width: auto; min-width: 120px;">
+                <option value="ALL">All Channels</option>
+                <option value="TRANSFER">TRANSFER</option>
+                <option value="CASH_OUT">CASH_OUT</option>
+                <option value="PAYMENT">PAYMENT</option>
+                <option value="DEBIT">DEBIT</option>
+              </select>
+            </div>
+
+            <div class="issue-filter-right">
+              <button class="aegis-btn" id="resetFiltersBtn" title="Reset Filters">
+                <i class="bi bi-arrow-counterclockwise"></i> Reset
+              </button>
+            </div>
+          </div>
+
+          <!-- Linear Segmented Tabs -->
+          <div class="linear-tabs">
+            <button class="linear-tab-item active queue-tab-btn" data-tab="ACTIVE">
+              <i class="bi bi-hourglass-split text-warning"></i> Active Queue
+              <span class="linear-tab-badge" id="tab-active-count">8</span>
+            </button>
+            <button class="linear-tab-item queue-tab-btn" data-tab="FROZEN">
+              <i class="bi bi-slash-circle text-danger"></i> Frozen Cases
+              <span class="linear-tab-badge" id="tab-frozen-count">1</span>
+            </button>
+            <button class="linear-tab-item queue-tab-btn" data-tab="RESOLVED">
+              <i class="bi bi-check-circle text-success"></i> Resolved Cases
+              <span class="linear-tab-badge" id="tab-resolved-count">1</span>
+            </button>
+            <button class="linear-tab-item queue-tab-btn" data-tab="FALSE_POSITIVE">
+              <i class="bi bi-flag text-dim"></i> Retraining / False Positives
+              <span class="linear-tab-badge" id="tab-fp-count">1</span>
+            </button>
+          </div>
+
+          <!-- Work-Item Issue Header -->
+          <div class="issue-row-header">
+            <div>#</div>
+            <div>Case ID</div>
+            <div>Channel</div>
+            <div>Amount ($)</div>
+            <div>Velocity</div>
+            <div>Structuring</div>
+            <div>Recipient Risk</div>
+            <div>Behavioral</div>
+            <div>Final Risk</div>
+            <div style="text-align: right;">Actions</div>
+          </div>
+
+          <!-- Work-Item Issue List -->
+          <div class="issue-list" id="queue-tbody">
+            <!-- Dynamically populated Linear Issue Rows -->
+          </div>
+
+          <!-- Footer Pagination -->
+          <div class="aegis-panel-header" style="border-top: 1px solid var(--border-base); border-bottom: none;">
+            <div class="text-muted font-mono" style="font-size: 0.6875rem;" id="queue-pagination-info">
+              Showing 1 - 8 work items
+            </div>
+            <div id="queue-pagination" style="display: flex; gap: 4px;">
+              <!-- Pagination links -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Custom Zero-Bootstrap Dark Modal -->
+  <div class="aegis-modal-backdrop" id="triageActionModal">
+    <div class="aegis-modal-box">
+      <div class="aegis-modal-header">
+        <div class="aegis-modal-title text-danger">
+          <i class="bi bi-slash-circle"></i> Confirm Immediate Account Freeze
+        </div>
+        <button type="button" class="aegis-btn" id="modalCloseBtn" style="padding: 0.2rem 0.4rem;">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+      <div class="aegis-modal-body">
+        <div style="background: var(--bg-app); border: 1px solid var(--border-base); border-radius: var(--radius-sm); padding: 0.75rem; margin-bottom: 1rem; font-family: var(--font-mono); font-size: 0.75rem;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+            <span class="text-muted">Target Case:</span>
+            <span class="fw-bold text-accent" id="modal-tx-id">TX-948271</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+            <span class="text-muted">Origin Account:</span>
+            <span class="fw-bold" id="modal-orig-acc">C847291039</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+            <span class="text-muted">Exposure Value:</span>
+            <span class="fw-bold text-danger" id="modal-amount">$850,000.00</span>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <span class="text-muted">Fraud Probability:</span>
+            <span class="fw-bold text-danger" id="modal-prob">99.42%</span>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 1rem;">
+          <label style="display: block; font-family: var(--font-mono); font-size: 0.6875rem; color: var(--text-muted); margin-bottom: 0.35rem;">
+            COMPLIANCE AUDIT JUSTIFICATION
+          </label>
+          <textarea id="modal-action-notes" class="aegis-input font-mono" rows="3" placeholder="State reason for freezing origin account and escrowing settlement funds..."></textarea>
+        </div>
+      </div>
+      <div class="aegis-modal-footer">
+        <button type="button" class="aegis-btn" id="modalCancelBtn">Cancel</button>
+        <button type="button" class="aegis-btn aegis-btn-danger" id="modalConfirmActionBtn">
+          <i class="bi bi-shield-slash"></i> Execute Account Freeze
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-container" class="toast-container-custom"></div>
+
+  <script src="js/config.js"></script>
+  <script src="js/toast.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/queue.js"></script>
+</body>
+</html>
