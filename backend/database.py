@@ -10,8 +10,12 @@ import io
 from datetime import datetime
 from typing import Dict, List, Optional, Any
 
-from risk_engine import RiskScoringEngine
-from recipient_reputation import RecipientReputationManager
+try:
+    from .risk_engine import RiskScoringEngine
+    from .recipient_reputation import RecipientReputationManager
+except ImportError:
+    from risk_engine import RiskScoringEngine
+    from recipient_reputation import RecipientReputationManager
 
 DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "fraud_triage.db")
 

@@ -18,26 +18,48 @@ import pandas as pd
 import joblib
 import shap
 
-from database import (
-    init_db,
-    update_transaction_status,
-    assign_case_analyst,
-    update_case_priority,
-    add_case_note,
-    escalate_case,
-    get_transactions_by_status,
-    get_transaction_by_id,
-    get_audit_logs,
-    get_all_alerts,
-    acknowledge_alert,
-    get_dashboard_stats,
-    export_transactions_csv,
-    get_connection,
-    reputation_mgr
-)
-from risk_engine import RiskScoringEngine
-from behavioral_engine import behavioral_engine
-from explanation import ExplainabilityService
+try:
+    from .database import (
+        init_db,
+        update_transaction_status,
+        assign_case_analyst,
+        update_case_priority,
+        add_case_note,
+        escalate_case,
+        get_transactions_by_status,
+        get_transaction_by_id,
+        get_audit_logs,
+        get_all_alerts,
+        acknowledge_alert,
+        get_dashboard_stats,
+        export_transactions_csv,
+        get_connection,
+        reputation_mgr
+    )
+    from .risk_engine import RiskScoringEngine
+    from .behavioral_engine import behavioral_engine
+    from .explanation import ExplainabilityService
+except ImportError:
+    from database import (
+        init_db,
+        update_transaction_status,
+        assign_case_analyst,
+        update_case_priority,
+        add_case_note,
+        escalate_case,
+        get_transactions_by_status,
+        get_transaction_by_id,
+        get_audit_logs,
+        get_all_alerts,
+        acknowledge_alert,
+        get_dashboard_stats,
+        export_transactions_csv,
+        get_connection,
+        reputation_mgr
+    )
+    from risk_engine import RiskScoringEngine
+    from behavioral_engine import behavioral_engine
+    from explanation import ExplainabilityService
 
 # Initialize database schema and seeds
 init_db()
